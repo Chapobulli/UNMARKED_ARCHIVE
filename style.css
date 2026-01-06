@@ -863,6 +863,13 @@ body {
         opacity: 0.22;
     }
 
+    /* Prevent background GIF cropping in contact section on mobile */
+    .contact-section {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
     .hero-title {
         font-size: 2.5rem;
     }
