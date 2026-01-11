@@ -518,24 +518,12 @@ if (productVideo && videoControls) {
 window.addEventListener('load', () => {
     const lookbookVideos = Array.from(document.querySelectorAll('.lookbook-video'));
     const muteBtn = document.getElementById('lookbookMuteBtn');
-    const heroVideo = document.querySelector('.lookbook-hero-video');
-    const heroPlayBtn = document.getElementById('heroPlayBtn');
     if (!lookbookVideos.length) return;
 
-    let isMuted = true; // Start muted
+    let isMuted = false; // Start unmuted for audio
 
-    // Hero video play/pause
-    if (heroVideo && heroPlayBtn) {
-        heroPlayBtn.addEventListener('click', () => {
-            if (heroVideo.paused) {
-                heroVideo.play();
-                heroPlayBtn.textContent = '⏸';
-            } else {
-                heroVideo.pause();
-                heroPlayBtn.textContent = '▶';
-            }
-        });
-    }
+    // Initialize all videos unmuted
+    lookbookVideos.forEach(v => v.muted = false);
 
     // Global mute toggle
     if (muteBtn) {
