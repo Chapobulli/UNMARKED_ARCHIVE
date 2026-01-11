@@ -24,9 +24,12 @@
     </header>
 
     <section class="lookbook-hero">
-        <video class="section-video" autoplay loop playsinline preload="metadata" poster="assets/images/LOOKBOOK/immagine 2.png">
+        <video class="section-video lookbook-video" autoplay loop muted playsinline preload="metadata" poster="assets/images/LOOKBOOK/immagine 2.png">
             <source src="assets/images/LOOKBOOK/video1.mp4" type="video/mp4">
         </video>
+        <div class="video-controls" id="heroVideoControls">
+            <button class="video-control-btn" id="heroPlayBtn" title="Play">▶</button>
+        </div>
         <div class="section-overlay"></div>
         <div class="container">
             <div class="lookbook-hero-content">
@@ -72,7 +75,7 @@
 
         <article class="flow-block video">
             <span class="media-badge">MOTION</span>
-            <video class="lookbook-video" controls playsinline preload="metadata" loop poster="assets/images/LOOKBOOK/immagine 2.png">
+            <video class="lookbook-video" controls muted playsinline preload="metadata" loop poster="assets/images/LOOKBOOK/immagine 2.png">
                 <source src="assets/images/LOOKBOOK/video 5.mp4" type="video/mp4">
             </video>
         </article>
@@ -84,7 +87,7 @@
 
         <article class="flow-block video">
             <span class="media-badge">MOTION</span>
-            <video class="lookbook-video" controls playsinline preload="metadata" loop poster="assets/images/LOOKBOOK/immagine 3.jpeg">
+            <video class="lookbook-video" controls muted playsinline preload="metadata" loop poster="assets/images/LOOKBOOK/immagine 3.jpeg">
                 <source src="assets/images/LOOKBOOK/video1.mp4" type="video/mp4">
             </video>
         </article>
