@@ -992,67 +992,88 @@ body {
     margin-top: 1rem;
 }
 
-.lookbook-gallery {
-    padding: 5rem 0 6rem;
+.lookbook-flow {
+    padding: 4rem 0 5rem;
     border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
-.gallery-heading {
+.flow-heading {
+    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: 2.5rem;
-    text-align: center;
 }
 
-.gallery-heading h2 {
+.flow-heading h2 {
     font-size: 1.6rem;
     letter-spacing: 0.16rem;
     text-transform: uppercase;
 }
 
-.gallery-heading p {
+.flow-subtitle {
     color: var(--color-text-muted);
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.08rem;
 }
 
-.lookbook-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.25rem;
-}
-
-.lookbook-card {
+.flow-block {
     position: relative;
-    border: 1px solid var(--color-border);
-    background: #0b0b0b;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     overflow: hidden;
-    aspect-ratio: 3 / 4;
+    background: #0b0b0b;
 }
 
-.lookbook-card img,
-.lookbook-card video {
+.flow-block img,
+.flow-block video {
     width: 100%;
-    height: 100%;
+    height: min(90vh, 1080px);
     object-fit: cover;
     display: block;
 }
 
-.lookbook-card video {
+.flow-block video {
     background: #000;
+}
+
+.flow-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.flow-line {
+    font-size: 0.9rem;
 }
 
 .media-badge {
     position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    background: rgba(0, 0, 0, 0.75);
+    top: 0.85rem;
+    left: 0.85rem;
+    background: rgba(0, 0, 0, 0.78);
     border: 1px solid var(--color-border);
-    padding: 0.25rem 0.6rem;
+    padding: 0.3rem 0.7rem;
     font-size: 0.7rem;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
     z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .flow-block img,
+    .flow-block video {
+        height: 70vh;
+    }
+    .flow-line {
+        font-size: 0.8rem;
+        letter-spacing: 0.08rem;
+    }
 }
 
 /* Responsive */
