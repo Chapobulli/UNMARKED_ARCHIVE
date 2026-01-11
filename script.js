@@ -379,76 +379,102 @@ document.querySelectorAll('.product-section, .contact-section').forEach(el => {
     observer.observe(el);
 });
 
-// Product Gallery + Zoom (robust binding)
+// Product Gallery + Simple hover zoom (clean effect)
 window.addEventListener('load', () => {
     const zoomContainer = document.getElementById('zoomContainer');
     const zoomIndicator = document.getElementById('zoomIndicator');
-    if (!zoomContainer || !mainImage) return;
+    if (!zoomContainer || !mainImage || !zoomIndicator) return;
 
-    let isZoomed = false;
-    const ZOOM_SCALE = 2.0; // 2x zoom
+    // Update indicator to show double-click instruction
+    zoomIndicator.textContent = '🔎 DOUBLE CLICK TO ZOOM';
+});
 
-    function enterZoom() {
-        isZoomed = true;
-        zoomContainer.classList.add('zoomed');
-        zoomContainer.style.backgroundImage = `url(${mainImage.src})`;
-        zoomContainer.style.backgroundSize = `${ZOOM_SCALE * 100}%`;
-        zoomContainer.style.backgroundPosition = '50% 50%';
-        if (zoomIndicator) zoomIndicator.textContent = '↔ DRAG TO EXPLORE — CLICK TO EXIT';
+// Image Lightbox: clean full-screen zoom with wheel and drag
+window.addEventListener('load', () => {
+    const imageModal = document.getElementById('imageModal');
+    const imageModalClose = document.getElementById('imageModalClose');
+    const imageModalImg = document.getElementById('imageModalImg');
+    if (!imageModal || !imageModalImg || !mainImage) return;
+
+    let scale = 1.8;
+    let posX = 0;
+    let posY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    function openImageModal() {
+        imageModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        imageModalImg.src = mainImage.src;
+        scale = 1.8; posX = 0; posY = 0;
+        updateTransform();
     }
 
-    function exitZoom() {
-        isZoomed = false;
-        zoomContainer.classList.remove('zoomed');
-        zoomContainer.style.backgroundImage = '';
-        if (zoomIndicator) zoomIndicator.textContent = '🔎 CLICK TO ZOOM';
+    function closeImageModal() {
+        imageModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
 
-    zoomContainer.addEventListener('click', () => {
-        if (!isZoomed) enterZoom();
-        else exitZoom();
-    });
+    function updateTransform() {
+        imageModalImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+    }
 
-    // Also bind click on the image to toggle zoom
-    mainImage.addEventListener('click', (e) => {
+    // Open via double click on main image
+    mainImage.addEventListener('dblclick', (e) => {
         e.preventDefault();
-        if (!isZoomed) enterZoom();
-        else exitZoom();
+        openImageModal();
     });
 
-    // Prevent native image drag behavior
-    mainImage.addEventListener('dragstart', (e) => e.preventDefault());
-
-    function updateBackgroundPosition(evt) {
-        const rect = zoomContainer.getBoundingClientRect();
-        let clientX, clientY;
-        if (evt.touches && evt.touches.length) {
-            clientX = evt.touches[0].clientX;
-            clientY = evt.touches[0].clientY;
-        } else {
-            clientX = evt.clientX;
-            clientY = evt.clientY;
-        }
-        const x = ((clientX - rect.left) / rect.width) * 100;
-        const y = ((clientY - rect.top) / rect.height) * 100;
-        zoomContainer.style.backgroundPosition = `${x}% ${y}%`;
-    }
-
-    zoomContainer.addEventListener('mousemove', (e) => {
-        if (isZoomed) updateBackgroundPosition(e);
+    imageModalClose.addEventListener('click', closeImageModal);
+    imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) closeImageModal();
     });
 
-    zoomContainer.addEventListener('touchmove', (e) => {
-        if (isZoomed) updateBackgroundPosition(e);
-    }, { passive: true });
-
-    // Allow mouse wheel to enter zoom for users trying to scroll
-    zoomContainer.addEventListener('wheel', (e) => {
-        if (!isZoomed) {
-            e.preventDefault();
-            enterZoom();
-        }
+    // Wheel zoom
+    imageModalImg.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = Math.sign(e.deltaY);
+        scale = Math.min(4, Math.max(1, scale - delta * 0.15));
+        updateTransform();
     }, { passive: false });
+
+    // Drag to pan
+    imageModalImg.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - posX;
+        startY = e.clientY - posY;
+        imageModalImg.classList.add('zooming');
+    });
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        posX = e.clientX - startX;
+        posY = e.clientY - startY;
+        updateTransform();
+    });
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+        imageModalImg.classList.remove('zooming');
+    });
+
+    // Touch drag
+    imageModalImg.addEventListener('touchstart', (e) => {
+        if (!e.touches.length) return;
+        isDragging = true;
+        startX = e.touches[0].clientX - posX;
+        startY = e.touches[0].clientY - posY;
+        imageModalImg.classList.add('zooming');
+    });
+    imageModalImg.addEventListener('touchmove', (e) => {
+        if (!isDragging || !e.touches.length) return;
+        posX = e.touches[0].clientX - startX;
+        posY = e.touches[0].clientY - startY;
+        updateTransform();
+    }, { passive: true });
+    imageModalImg.addEventListener('touchend', () => {
+        isDragging = false;
+        imageModalImg.classList.remove('zooming');
+    });
 });
 
 // Video Controls for Product Section

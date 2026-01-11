@@ -1068,30 +1068,15 @@ body {
     will-change: transform;
 }
 
-/* Hover fallback zoom (works even if JS fails) */
+/* Hover zoom - subtle effect */
 .gallery-zoom-container:hover .gallery-image {
-    transform: scale(1.35);
+    transform: scale(1.05);
 }
 
-.gallery-image:hover {
-    transform: scale(1.02);
-}
-
-.gallery-image.zoomed {
-    transform: scale(1.5);
-}
-
-/* Background-position zoom mode */
+/* Old zoom classes - DISABLED, using lightbox instead */
+.gallery-image.zoomed,
 .gallery-zoom-container.zoomed {
-    cursor: zoom-out;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 200%;
-}
-
-.gallery-zoom-container.zoomed .gallery-image {
-    opacity: 0;
-    pointer-events: none;
+    display: none;
 }
 
 .zoom-indicator {
