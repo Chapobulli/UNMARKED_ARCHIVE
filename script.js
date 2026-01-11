@@ -12,7 +12,6 @@ const thumbs = document.querySelectorAll('.thumb');
 const productImages = [
     'assets/product/product-black.png',
     'assets/product/product-white.png',
-    'assets/product/product-white1.png',
     'assets/product/product-brown.png'
 ];
 
