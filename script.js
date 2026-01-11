@@ -1,76 +1,80 @@
 // Loading Screen
 window.addEventListener('load', () => {
     const loadingScreen = document.getElementById('loadingScreen');
-    setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-    }, 1000);
-});
+    // Product Gallery + Zoom (robust binding with null-safety)
+    window.addEventListener('load', () => {
+        const zoomContainer = document.getElementById('zoomContainer');
+        const zoomIndicator = document.getElementById('zoomIndicator');
+        if (!zoomContainer || !mainImage) {
+            console.warn('Zoom container or main image not found. Hover fallback will be used.');
+            return;
+        }
 
-// Product Gallery
-const mainImage = document.getElementById('mainImage');
-const thumbs = document.querySelectorAll('.thumb');
-const productImages = [
-    'assets/product/product-black.png',
-    'assets/product/product-white.png',
-    'assets/product/product-white1.png',
-    'assets/product/product-brown.png'
-];
+        let isZoomed = false;
+        const ZOOM_SCALE = 2.0; // 2x zoom
 
-thumbs.forEach((thumb, index) => {
-    thumb.addEventListener('click', () => {
-        thumbs.forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        mainImage.style.opacity = '0';
-        setTimeout(() => {
-            mainImage.src = productImages[index];
-            mainImage.style.opacity = '1';
-            // If zoom is active, update background image to new source
-            if (typeof isZoomed !== 'undefined' && isZoomed) {
-                zoomContainer.style.backgroundImage = `url(${mainImage.src})`;
+        function enterZoom() {
+            isZoomed = true;
+            zoomContainer.classList.add('zoomed');
+            zoomContainer.style.backgroundImage = `url(${mainImage.src})`;
+            zoomContainer.style.backgroundSize = `${ZOOM_SCALE * 100}%`;
+            zoomContainer.style.backgroundPosition = '50% 50%';
+            if (zoomIndicator) zoomIndicator.textContent = '↔ DRAG TO EXPLORE — CLICK TO EXIT';
+        }
+
+        function exitZoom() {
+            isZoomed = false;
+            zoomContainer.classList.remove('zoomed');
+            zoomContainer.style.backgroundImage = '';
+            if (zoomIndicator) zoomIndicator.textContent = '🔎 CLICK TO ZOOM';
+        }
+
+        zoomContainer.addEventListener('click', () => {
+            if (!isZoomed) enterZoom();
+            else exitZoom();
+        });
+
+        // Also bind click on the image to toggle zoom
+        mainImage.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!isZoomed) enterZoom();
+            else exitZoom();
+        });
+
+        // Prevent native image drag behavior
+        mainImage.addEventListener('dragstart', (e) => e.preventDefault());
+
+        function updateBackgroundPosition(evt) {
+            const rect = zoomContainer.getBoundingClientRect();
+            let clientX, clientY;
+            if (evt.touches && evt.touches.length) {
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            } else {
+                clientX = evt.clientX;
+                clientY = evt.clientY;
             }
-        }, 120);
+            const x = ((clientX - rect.left) / rect.width) * 100;
+            const y = ((clientY - rect.top) / rect.height) * 100;
+            zoomContainer.style.backgroundPosition = `${x}% ${y}%`;
+        }
+
+        zoomContainer.addEventListener('mousemove', (e) => {
+            if (isZoomed) updateBackgroundPosition(e);
+        });
+
+        zoomContainer.addEventListener('touchmove', (e) => {
+            if (isZoomed) updateBackgroundPosition(e);
+        }, { passive: true });
+
+        // Allow mouse wheel to enter zoom for users trying to scroll
+        zoomContainer.addEventListener('wheel', (e) => {
+            if (!isZoomed) {
+                e.preventDefault();
+                enterZoom();
+            }
+        }, { passive: false });
     });
-});
-
-// Countdown Timer - Set end date (14 days from now)
-const countdownDate = new Date();
-countdownDate.setDate(countdownDate.getDate() + 14);
-countdownDate.setHours(23, 59, 59);
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-
-    if (distance < 0) {
-        clearInterval(countdownInterval);
-        document.getElementById('countdown').innerHTML = '<p>PREORDER CLOSED</p>';
-    }
-}
-
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// Preorder Counter Animation
-let preorderCount = 47;
-const counterElement = document.getElementById('preorderCount');
-let currentCount = 0;
-
-function animateCounter() {
-    const increment = Math.ceil(preorderCount / 50);
-    const timer = setInterval(() => {
-        currentCount += increment;
-        if (currentCount >= preorderCount) {
-            currentCount = preorderCount;
             clearInterval(timer);
         }
         counterElement.textContent = currentCount;

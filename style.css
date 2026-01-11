@@ -1031,6 +1031,12 @@ body {
     cursor: zoom-in;
     -webkit-user-drag: none;
     user-select: none;
+    will-change: transform;
+}
+
+/* Hover fallback zoom (works even if JS fails) */
+.gallery-zoom-container:hover .gallery-image {
+    transform: scale(1.35);
 }
 
 .gallery-image:hover {
