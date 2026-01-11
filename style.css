@@ -646,6 +646,11 @@ body {
     transform-origin: center center;
     cursor: grab;
     box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none; /* enable custom pinch/drag */
+    will-change: transform;
 }
 
 .image-modal-img.zooming {

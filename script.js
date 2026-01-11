@@ -295,66 +295,41 @@ form.addEventListener('submit', async function(e) {
     }
 });
 
-// Newsletter Form
+// Newsletter Form (guarded: current UI is an Instagram link, no form)
 const newsletterForm = document.getElementById('newsletterForm');
 const newsletterMessage = document.getElementById('newsletterMessage');
 
-newsletterForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const email = this.querySelector('input[type="email"]').value;
-    
-    if (!isValidEmail(email)) {
-        newsletterMessage.textContent = '✗ INVALID EMAIL ADDRESS';
-        newsletterMessage.className = 'newsletter-message error';
-        return;
-    }
-    
-    const submitBtn = this.querySelector('button');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'SUBSCRIBING...';
-    submitBtn.disabled = true;
-    
-    try {
-        // For now, just show success. Integrate with Mailchimp/Buttondown later
-        setTimeout(() => {
-            newsletterMessage.textContent = '✓ SUBSCRIBED! THANK YOU.';
-            newsletterMessage.className = 'newsletter-message success';
-            newsletterForm.reset();
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        if (!isValidEmail(email)) {
+            newsletterMessage.textContent = '✗ INVALID EMAIL ADDRESS';
+            newsletterMessage.className = 'newsletter-message error';
+            return;
+        }
+        const submitBtn = this.querySelector('button');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'SUBSCRIBING...';
+        submitBtn.disabled = true;
+        try {
+            setTimeout(() => {
+                newsletterMessage.textContent = '✓ SUBSCRIBED! THANK YOU.';
+                newsletterMessage.className = 'newsletter-message success';
+                newsletterForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                setTimeout(() => { newsletterMessage.textContent = ''; }, 3000);
+            }, 1000);
+        } catch (error) {
+            console.error('Error:', error);
+            newsletterMessage.textContent = '✗ ERROR. TRY AGAIN.';
+            newsletterMessage.className = 'newsletter-message error';
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-            
-            setTimeout(() => {
-                newsletterMessage.textContent = '';
-            }, 3000);
-        }, 1000);
-        
-        /* 
-        // To integrate with a service like Mailchimp or Buttondown:
-        
-        const response = await fetch('YOUR_NEWSLETTER_ENDPOINT', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email })
-        });
-        
-        if (response.ok) {
-            newsletterMessage.textContent = '✓ SUBSCRIBED! THANK YOU.';
-            newsletterMessage.className = 'newsletter-message success';
-            newsletterForm.reset();
-        } else {
-            throw new Error('Subscription failed');
         }
-        */
-        
-    } catch (error) {
-        console.error('Error:', error);
-        newsletterMessage.textContent = '✗ ERROR. TRY AGAIN.';
-        newsletterMessage.className = 'newsletter-message error';
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }
-});
+    });
+}
 
 // Add intersection observer for scroll animations (optional)
 const observerOptions = {
@@ -379,101 +354,130 @@ document.querySelectorAll('.product-section, .contact-section').forEach(el => {
     observer.observe(el);
 });
 
-// Product Gallery + Simple hover zoom (clean effect)
+// Product Zoom: fresh lightbox with pointer + pinch support
 window.addEventListener('load', () => {
     const zoomContainer = document.getElementById('zoomContainer');
     const zoomIndicator = document.getElementById('zoomIndicator');
-    if (!zoomContainer || !mainImage || !zoomIndicator) return;
-
-    // Update indicator to show double-click instruction
-    zoomIndicator.textContent = '🔎 DOUBLE CLICK TO ZOOM';
-});
-
-// Image Lightbox: clean full-screen zoom with wheel and drag
-window.addEventListener('load', () => {
     const imageModal = document.getElementById('imageModal');
     const imageModalClose = document.getElementById('imageModalClose');
     const imageModalImg = document.getElementById('imageModalImg');
-    if (!imageModal || !imageModalImg || !mainImage) return;
+    if (!zoomContainer || !zoomIndicator || !mainImage || !imageModal || !imageModalImg) return;
 
-    let scale = 1.8;
+    // Indicator message
+    zoomIndicator.textContent = '🔎 CLICK TO ZOOM';
+
+    // State
+    let scale = 1.5; // default zoom level
     let posX = 0;
     let posY = 0;
+    let baseW = 0;
+    let baseH = 0;
     let isDragging = false;
     let startX = 0;
     let startY = 0;
+    let pointers = new Map(); // for pinch
 
-    function openImageModal() {
-        imageModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        imageModalImg.src = mainImage.src;
-        scale = 1.8; posX = 0; posY = 0;
-        updateTransform();
-    }
+    function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
 
-    function closeImageModal() {
-        imageModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+    function bounds() {
+        const container = imageModal.querySelector('.image-modal-content');
+        if (!container) return { maxX: 0, maxY: 0 };
+        const cw = container.clientWidth;
+        const ch = container.clientHeight;
+        const scaledW = baseW * scale;
+        const scaledH = baseH * scale;
+        const maxX = Math.max(0, (scaledW - cw) / 2);
+        const maxY = Math.max(0, (scaledH - ch) / 2);
+        return { maxX, maxY };
     }
 
     function updateTransform() {
+        const { maxX, maxY } = bounds();
+        posX = clamp(posX, -maxX, maxX);
+        posY = clamp(posY, -maxY, maxY);
         imageModalImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
     }
 
-    // Open via double click on main image
-    mainImage.addEventListener('dblclick', (e) => {
-        e.preventDefault();
-        openImageModal();
-    });
+    function openLightbox() {
+        imageModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        imageModalImg.src = mainImage.src;
+        // Wait for layout
+        requestAnimationFrame(() => {
+            baseW = imageModalImg.clientWidth;
+            baseH = imageModalImg.clientHeight;
+            scale = 1.5; posX = 0; posY = 0;
+            updateTransform();
+        });
+    }
 
-    imageModalClose.addEventListener('click', closeImageModal);
-    imageModal.addEventListener('click', (e) => {
-        if (e.target === imageModal) closeImageModal();
-    });
+    function closeLightbox() {
+        imageModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        pointers.clear();
+        isDragging = false;
+    }
 
-    // Wheel zoom
+    // Open on click/tap
+    mainImage.addEventListener('click', (e) => { e.preventDefault(); openLightbox(); });
+
+    // Close interactions
+    imageModalClose.addEventListener('click', closeLightbox);
+    imageModal.addEventListener('click', (e) => { if (e.target === imageModal) closeLightbox(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Wheel zoom (desktop)
     imageModalImg.addEventListener('wheel', (e) => {
         e.preventDefault();
-        const delta = Math.sign(e.deltaY);
-        scale = Math.min(4, Math.max(1, scale - delta * 0.15));
+        const factor = e.deltaY < 0 ? 1.1 : 0.9;
+        scale = clamp(scale * factor, 1, 5);
         updateTransform();
     }, { passive: false });
 
-    // Drag to pan
-    imageModalImg.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX - posX;
-        startY = e.clientY - posY;
-        imageModalImg.classList.add('zooming');
-    });
-    window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        posX = e.clientX - startX;
-        posY = e.clientY - startY;
-        updateTransform();
-    });
-    window.addEventListener('mouseup', () => {
-        isDragging = false;
-        imageModalImg.classList.remove('zooming');
+    // Pointer events (mouse + touch)
+    imageModalImg.addEventListener('pointerdown', (e) => {
+        imageModalImg.setPointerCapture(e.pointerId);
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.size === 1) {
+            isDragging = true;
+            startX = e.clientX - posX;
+            startY = e.clientY - posY;
+            imageModalImg.classList.add('zooming');
+        }
     });
 
-    // Touch drag
-    imageModalImg.addEventListener('touchstart', (e) => {
-        if (!e.touches.length) return;
-        isDragging = true;
-        startX = e.touches[0].clientX - posX;
-        startY = e.touches[0].clientY - posY;
-        imageModalImg.classList.add('zooming');
+    imageModalImg.addEventListener('pointermove', (e) => {
+        if (!pointers.has(e.pointerId)) return;
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.size === 1 && isDragging) {
+            posX = e.clientX - startX;
+            posY = e.clientY - startY;
+            updateTransform();
+        } else if (pointers.size === 2) {
+            const vals = Array.from(pointers.values());
+            const dx = vals[0].x - vals[1].x;
+            const dy = vals[0].y - vals[1].y;
+            const dist = Math.hypot(dx, dy);
+            if (!imageModalImg._startDist) {
+                imageModalImg._startDist = dist;
+                imageModalImg._startScale = scale;
+            } else {
+                const ratio = dist / imageModalImg._startDist;
+                scale = clamp(imageModalImg._startScale * ratio, 1, 5);
+                updateTransform();
+            }
+        }
     });
-    imageModalImg.addEventListener('touchmove', (e) => {
-        if (!isDragging || !e.touches.length) return;
-        posX = e.touches[0].clientX - startX;
-        posY = e.touches[0].clientY - startY;
-        updateTransform();
-    }, { passive: true });
-    imageModalImg.addEventListener('touchend', () => {
-        isDragging = false;
-        imageModalImg.classList.remove('zooming');
+
+    imageModalImg.addEventListener('pointerup', (e) => {
+        imageModalImg.releasePointerCapture(e.pointerId);
+        pointers.delete(e.pointerId);
+        if (pointers.size === 0) {
+            isDragging = false;
+            imageModalImg.classList.remove('zooming');
+            imageModalImg._startDist = null;
+            imageModalImg._startScale = null;
+        }
     });
 });
 
