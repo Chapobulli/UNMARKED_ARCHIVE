@@ -512,4 +512,40 @@ if (productVideo && videoControls) {
     });
 }
 
+// Lookbook videos: play on hover/visibility, pause when not visible
+window.addEventListener('load', () => {
+    const lookbookVideos = Array.from(document.querySelectorAll('.lookbook-video'));
+    if (!lookbookVideos.length) return;
+
+    function safePlay(video) {
+        const p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+    }
+
+    function pauseAllExcept(current) {
+        lookbookVideos.forEach(v => {
+            if (v !== current) v.pause();
+        });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const vid = entry.target;
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                pauseAllExcept(vid);
+                safePlay(vid);
+            } else {
+                vid.pause();
+            }
+        });
+    }, { threshold: [0.6, 0.8, 1] });
+
+    lookbookVideos.forEach(vid => {
+        observer.observe(vid);
+        vid.addEventListener('mouseenter', () => { pauseAllExcept(vid); safePlay(vid); });
+        vid.addEventListener('mouseleave', () => { vid.pause(); });
+        vid.addEventListener('touchstart', () => { pauseAllExcept(vid); safePlay(vid); }, { passive: true });
+    });
+});
+
 // (Countdown already initialized above)
