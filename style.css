@@ -69,6 +69,7 @@ body {
     background: var(--color-border);
     position: relative;
     overflow: hidden;
+    margin: 0 auto; /* center within loading content */
 }
 
 .loading-bar::after {
