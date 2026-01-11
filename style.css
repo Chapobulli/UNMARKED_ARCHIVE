@@ -1029,6 +1029,8 @@ body {
     display: block;
     transition: opacity 0.3s ease, transform 0.3s ease;
     cursor: zoom-in;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .gallery-image:hover {

@@ -24,6 +24,10 @@ thumbs.forEach((thumb, index) => {
         setTimeout(() => {
             mainImage.src = productImages[index];
             mainImage.style.opacity = '1';
+            // If zoom is active, update background image to new source
+            if (typeof isZoomed !== 'undefined' && isZoomed) {
+                zoomContainer.style.backgroundImage = `url(${mainImage.src})`;
+            }
         }, 120);
     });
 });
@@ -406,6 +410,16 @@ zoomContainer.addEventListener('click', () => {
     if (!isZoomed) enterZoom();
     else exitZoom();
 });
+
+// Also bind click on the image to toggle zoom (some browsers capture image click differently)
+mainImage.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!isZoomed) enterZoom();
+    else exitZoom();
+});
+
+// Prevent native image drag behavior
+mainImage.addEventListener('dragstart', (e) => e.preventDefault());
 
 function updateBackgroundPosition(evt) {
     const rect = zoomContainer.getBoundingClientRect();
