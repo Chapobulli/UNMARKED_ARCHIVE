@@ -520,7 +520,7 @@ window.addEventListener('load', () => {
     const muteBtn = document.getElementById('lookbookMuteBtn');
     if (!lookbookVideos.length) return;
 
-    let isMuted = false; // Start unmuted for audio
+    let isMuted = false; // video 1 starts unmuted (audio on)
 
     // Lazy load hero video on intersection
     if (heroVideo) {
@@ -535,14 +535,37 @@ window.addEventListener('load', () => {
         heroObserver.observe(heroVideo);
     }
 
-    // Initialize all videos unmuted
-    lookbookVideos.forEach(v => v.muted = false);
+    const otherVideos = heroVideo ? lookbookVideos.filter(v => v !== heroVideo) : lookbookVideos;
+
+    // Only the hero video should ever have audio
+    otherVideos.forEach(v => {
+        v.muted = true;
+        v.volume = 0;
+    });
+
+    if (heroVideo) {
+        heroVideo.muted = isMuted;
+        heroVideo.volume = isMuted ? 0 : 1;
+    }
+
+    if (muteBtn) {
+        muteBtn.textContent = isMuted ? '🔇' : '🔊';
+        muteBtn.classList.toggle('active', !isMuted);
+    }
 
     // Global mute toggle
     if (muteBtn) {
         muteBtn.addEventListener('click', () => {
             isMuted = !isMuted;
-            lookbookVideos.forEach(v => v.muted = isMuted);
+            if (heroVideo) {
+                heroVideo.muted = isMuted;
+                heroVideo.volume = isMuted ? 0 : 1;
+
+                // User gesture: try to (re)start playback with audio
+                if (!isMuted) {
+                    heroVideo.play().catch(() => {});
+                }
+            }
             muteBtn.classList.toggle('active', !isMuted);
             muteBtn.textContent = isMuted ? '🔇' : '🔊';
         });
