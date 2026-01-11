@@ -518,7 +518,7 @@ if (productVideo && videoControls) {
 window.addEventListener('load', () => {
     const lookbookVideos = Array.from(document.querySelectorAll('.lookbook-video'));
     const muteBtn = document.getElementById('lookbookMuteBtn');
-    const heroVideo = document.querySelector('.lookbook-hero .lookbook-video');
+    const heroVideo = document.querySelector('.lookbook-hero-video');
     const heroPlayBtn = document.getElementById('heroPlayBtn');
     if (!lookbookVideos.length) return;
 
