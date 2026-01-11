@@ -53,6 +53,11 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <img src="assets/images/hero.gif" alt="" class="hero-background" />
+        <img src="assets/images/hero.gif" alt="" class="hero-background" loading="lazy" />
+        <div class="hero-video-controls" id="heroControls" style="display:none;">
+            <button class="video-control-btn" id="heroPlayBtn" title="Play">▶</button>
+            <button class="video-control-btn" id="heroMuteBtn" title="Mute">🔊</button>
+        </div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
@@ -93,17 +98,27 @@
         <video class="section-video" autoplay loop muted playsinline>
             <source src="assets/videos/hero-video.mp4" type="video/mp4">
         </video>
+        <video class="section-video" id="productVideo" autoplay loop muted playsinline>
+            <source src="assets/videos/hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="video-controls" id="videoControls" style="display:none;">
+            <button class="video-control-btn" id="playBtn" title="Play">▶</button>
+            <button class="video-control-btn" id="muteBtn" title="Mute">🔊</button>
+        </div>
         <div class="section-overlay"></div>
         <div class="container">
             <div class="product-grid">
                 <div class="product-image">
                     <div class="product-gallery">
-                        <img src="assets/product/product-black.png" alt="OPIUM HOODIE BLACK" class="gallery-image active" id="mainImage">
+                        <div class="gallery-zoom-container" id="zoomContainer">
+                            <img src="assets/product/product-black.png" alt="OPIUM HOODIE BLACK" class="gallery-image active" id="mainImage" loading="lazy">
+                            <div class="zoom-indicator" id="zoomIndicator">🔍 SCROLL TO ZOOM</div>
+                        </div>
                         <div class="gallery-thumbs">
-                            <img src="assets/product/product-black.png" alt="Black" class="thumb active" data-index="0">
-                            <img src="assets/product/product-white.png" alt="White" class="thumb" data-index="1">
-                            <img src="assets/product/product-white1.png" alt="White alt" class="thumb" data-index="2">
-                            <img src="assets/product/product-brown.png" alt="Brown" class="thumb" data-index="3">
+                            <img src="assets/product/product-black.png" alt="Black" class="thumb active" data-index="0" loading="lazy">
+                            <img src="assets/product/product-white.png" alt="White" class="thumb" data-index="1" loading="lazy">
+                            <img src="assets/product/product-white1.png" alt="White alt" class="thumb" data-index="2" loading="lazy">
+                            <img src="assets/product/product-brown.png" alt="Brown" class="thumb" data-index="3" loading="lazy">
                         </div>
                     </div>
                 </div>

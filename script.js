@@ -376,3 +376,78 @@ document.querySelectorAll('.product-section, .contact-section').forEach(el => {
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
+
+// Product Gallery + Zoom
+const mainImage = document.getElementById('mainImage');
+const zoomContainer = document.getElementById('zoomContainer');
+const zoomIndicator = document.getElementById('zoomIndicator');
+const thumbs = document.querySelectorAll('.thumb');
+const productImages = [
+    'assets/product/product-black.png',
+    'assets/product/product-white.png',
+    'assets/product/product-white1.png',
+    'assets/product/product-brown.png'
+];
+
+let isZoomed = false;
+
+// Zoom functionality
+zoomContainer.addEventListener('click', () => {
+    isZoomed = !isZoomed;
+    if (isZoomed) {
+        mainImage.classList.add('zoomed');
+        zoomContainer.style.cursor = 'zoom-out';
+        zoomIndicator.textContent = '✕ CLICK TO UNZOOM';
+    } else {
+        mainImage.classList.remove('zoomed');
+        zoomContainer.style.cursor = 'zoom-in';
+        zoomIndicator.textContent = '🔍 SCROLL TO ZOOM';
+    }
+});
+
+// Wheel zoom on desktop
+zoomContainer.addEventListener('wheel', (e) => {
+    if (!isZoomed) {
+        e.preventDefault();
+        isZoomed = true;
+        mainImage.classList.add('zoomed');
+        zoomContainer.style.cursor = 'zoom-out';
+        zoomIndicator.textContent = '✕ CLICK TO UNZOOM';
+    }
+}, { passive: false });
+
+// Video Controls for Product Section
+const productVideo = document.getElementById('productVideo');
+const videoControls = document.getElementById('videoControls');
+const playBtn = document.getElementById('playBtn');
+const muteBtn = document.getElementById('muteBtn');
+
+if (productVideo && videoControls) {
+    productVideo.addEventListener('mouseenter', () => {
+        videoControls.style.display = 'flex';
+    });
+    productVideo.addEventListener('mouseleave', () => {
+        videoControls.style.display = 'none';
+    });
+    
+    playBtn.addEventListener('click', () => {
+        if (productVideo.paused) {
+            productVideo.play();
+            playBtn.textContent = '⏸';
+        } else {
+            productVideo.pause();
+            playBtn.textContent = '▶';
+        }
+    });
+    
+    muteBtn.addEventListener('click', () => {
+        productVideo.muted = !productVideo.muted;
+        muteBtn.classList.toggle('active');
+        muteBtn.textContent = productVideo.muted ? '🔇' : '🔊';
+    });
+}
+
+// Countdown Timer - Set end date (14 days from now)
+const countdownDate = new Date();
+countdownDate.setDate(countdownDate.getDate() + 14);
+countdownDate.setHours(23, 59, 59);
