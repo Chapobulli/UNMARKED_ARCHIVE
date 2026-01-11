@@ -378,16 +378,8 @@ document.querySelectorAll('.product-section, .contact-section').forEach(el => {
 });
 
 // Product Gallery + Zoom
-const mainImage = document.getElementById('mainImage');
 const zoomContainer = document.getElementById('zoomContainer');
 const zoomIndicator = document.getElementById('zoomIndicator');
-const thumbs = document.querySelectorAll('.thumb');
-const productImages = [
-    'assets/product/product-black.png',
-    'assets/product/product-white.png',
-    'assets/product/product-white1.png',
-    'assets/product/product-brown.png'
-];
 
 let isZoomed = false;
 
@@ -447,7 +439,4 @@ if (productVideo && videoControls) {
     });
 }
 
-// Countdown Timer - Set end date (14 days from now)
-const countdownDate = new Date();
-countdownDate.setDate(countdownDate.getDate() + 14);
-countdownDate.setHours(23, 59, 59);
+// (Countdown already initialized above)
