@@ -516,10 +516,24 @@ if (productVideo && videoControls) {
 // Lookbook videos: smart playback control with mute toggle and one-at-a-time sync
 window.addEventListener('load', () => {
     const lookbookVideos = Array.from(document.querySelectorAll('.lookbook-video'));
+    const heroVideo = document.querySelector('.lookbook-hero-video');
     const muteBtn = document.getElementById('lookbookMuteBtn');
     if (!lookbookVideos.length) return;
 
     let isMuted = false; // Start unmuted for audio
+
+    // Lazy load hero video on intersection
+    if (heroVideo) {
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    heroVideo.preload = 'auto';
+                    heroObserver.unobserve(heroVideo);
+                }
+            });
+        }, { threshold: 0.1 });
+        heroObserver.observe(heroVideo);
+    }
 
     // Initialize all videos unmuted
     lookbookVideos.forEach(v => v.muted = false);
