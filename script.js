@@ -383,33 +383,31 @@ const zoomIndicator = document.getElementById('zoomIndicator');
 
 let isZoomed = false;
 
-// Zoom functionality
+// Background-position zoom/pan (reliable and simple)
+const ZOOM_SCALE = 2.0; // 2x zoom
+
+function enterZoom() {
+    isZoomed = true;
+    zoomContainer.classList.add('zoomed');
+    zoomContainer.style.backgroundImage = `url(${mainImage.src})`;
+    zoomContainer.style.backgroundSize = `${ZOOM_SCALE * 100}%`;
+    zoomContainer.style.backgroundPosition = '50% 50%';
+    zoomIndicator.textContent = '↔ DRAG TO EXPLORE — CLICK TO EXIT';
+}
+
+function exitZoom() {
+    isZoomed = false;
+    zoomContainer.classList.remove('zoomed');
+    zoomContainer.style.backgroundImage = '';
+    zoomIndicator.textContent = '🔍 SCROLL TO ZOOM';
+}
+
 zoomContainer.addEventListener('click', () => {
-    isZoomed = !isZoomed;
-    if (isZoomed) {
-        mainImage.classList.add('zoomed');
-        zoomContainer.style.cursor = 'zoom-out';
-        zoomIndicator.textContent = '✕ CLICK TO UNZOOM';
-    } else {
-        mainImage.classList.remove('zoomed');
-        zoomContainer.style.cursor = 'zoom-in';
-        zoomIndicator.textContent = '🔍 SCROLL TO ZOOM';
-    }
+    if (!isZoomed) enterZoom();
+    else exitZoom();
 });
 
-// Wheel zoom on desktop
-zoomContainer.addEventListener('wheel', (e) => {
-    if (!isZoomed) {
-        e.preventDefault();
-        isZoomed = true;
-        mainImage.classList.add('zoomed');
-        zoomContainer.style.cursor = 'zoom-out';
-        zoomIndicator.textContent = '✕ CLICK TO UNZOOM';
-    }
-}, { passive: false });
-
-// Update transform origin based on cursor/touch position for intuitive zoom
-function setTransformOriginFromEvent(evt) {
+function updateBackgroundPosition(evt) {
     const rect = zoomContainer.getBoundingClientRect();
     let clientX, clientY;
     if (evt.touches && evt.touches.length) {
@@ -421,15 +419,15 @@ function setTransformOriginFromEvent(evt) {
     }
     const x = ((clientX - rect.left) / rect.width) * 100;
     const y = ((clientY - rect.top) / rect.height) * 100;
-    mainImage.style.transformOrigin = `${x}% ${y}%`;
+    zoomContainer.style.backgroundPosition = `${x}% ${y}%`;
 }
 
 zoomContainer.addEventListener('mousemove', (e) => {
-    if (isZoomed) setTransformOriginFromEvent(e);
+    if (isZoomed) updateBackgroundPosition(e);
 });
 
 zoomContainer.addEventListener('touchmove', (e) => {
-    if (isZoomed) setTransformOriginFromEvent(e);
+    if (isZoomed) updateBackgroundPosition(e);
 }, { passive: true });
 
 // Video Controls for Product Section

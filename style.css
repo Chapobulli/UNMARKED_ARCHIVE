@@ -1039,6 +1039,19 @@ body {
     transform: scale(1.5);
 }
 
+/* Background-position zoom mode */
+.gallery-zoom-container.zoomed {
+    cursor: zoom-out;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200%;
+}
+
+.gallery-zoom-container.zoomed .gallery-image {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .zoom-indicator {
     position: absolute;
     bottom: 1rem;
