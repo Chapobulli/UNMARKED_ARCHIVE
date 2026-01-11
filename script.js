@@ -411,6 +411,14 @@ zoomContainer.addEventListener('click', () => {
     else exitZoom();
 });
 
+// Allow mouse wheel to enter zoom for users trying to scroll
+zoomContainer.addEventListener('wheel', (e) => {
+    if (!isZoomed) {
+        e.preventDefault();
+        enterZoom();
+    }
+}, { passive: false });
+
 // Also bind click on the image to toggle zoom (some browsers capture image click differently)
 mainImage.addEventListener('click', (e) => {
     e.preventDefault();
