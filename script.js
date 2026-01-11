@@ -162,8 +162,10 @@ form.addEventListener('submit', async function(e) {
     }
 
     // Validate required fields
-    if (!data.name || !data.email || !data.size || !data.color) {
-        formMessage.textContent = 'PLEASE FILL ALL REQUIRED FIELDS';
+    const consentBox = document.getElementById('privacyConsent');
+    const consentGiven = consentBox ? consentBox.checked : false;
+    if (!data.name || !data.email || !data.size || !data.color || !consentGiven) {
+        formMessage.textContent = consentGiven ? 'PLEASE FILL ALL REQUIRED FIELDS' : 'PLEASE ACCEPT PRIVACY TERMS';
         formMessage.className = 'form-note error';
         return;
     }
