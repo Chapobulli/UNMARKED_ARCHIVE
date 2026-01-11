@@ -549,6 +549,8 @@ window.addEventListener('load', () => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) {
                 entry.target.pause();
+            } else if (entry.target.classList.contains('lookbook-autoplay')) {
+                entry.target.play();
             }
         });
     }, { threshold: 0.3 });
