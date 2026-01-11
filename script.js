@@ -514,40 +514,43 @@ if (productVideo && videoControls) {
     });
 }
 
-// Lookbook videos: play on hover/visibility, pause when not visible
+// Lookbook videos: smart playback control with mute toggle and one-at-a-time sync
 window.addEventListener('load', () => {
     const lookbookVideos = Array.from(document.querySelectorAll('.lookbook-video'));
+    const muteBtn = document.getElementById('lookbookMuteBtn');
     if (!lookbookVideos.length) return;
 
-    function safePlay(video) {
-        const p = video.play();
-        if (p && typeof p.catch === 'function') p.catch(() => {});
-    }
+    let isMuted = false;
 
-    function pauseAllExcept(current) {
-        lookbookVideos.forEach(v => {
-            if (v !== current) v.pause();
+    // Global mute toggle
+    if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+            isMuted = !isMuted;
+            lookbookVideos.forEach(v => v.muted = isMuted);
+            muteBtn.classList.toggle('active');
+            muteBtn.textContent = isMuted ? '🔇' : '🔊';
         });
     }
 
+    // Pause all except current when one starts playing
+    lookbookVideos.forEach(vid => {
+        vid.addEventListener('play', () => {
+            lookbookVideos.forEach(v => {
+                if (v !== vid) v.pause();
+            });
+        });
+    });
+
+    // Auto-pause when leaving viewport
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const vid = entry.target;
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-                pauseAllExcept(vid);
-                safePlay(vid);
-            } else {
-                vid.pause();
+            if (!entry.isIntersecting) {
+                entry.target.pause();
             }
         });
-    }, { threshold: [0.6, 0.8, 1] });
+    }, { threshold: 0.3 });
 
-    lookbookVideos.forEach(vid => {
-        observer.observe(vid);
-        vid.addEventListener('mouseenter', () => { pauseAllExcept(vid); safePlay(vid); });
-        vid.addEventListener('mouseleave', () => { vid.pause(); });
-        vid.addEventListener('touchstart', () => { pauseAllExcept(vid); safePlay(vid); }, { passive: true });
-    });
+    lookbookVideos.forEach(vid => observer.observe(vid));
 });
 
 // (Countdown already initialized above)
