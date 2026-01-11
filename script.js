@@ -408,6 +408,30 @@ zoomContainer.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
+// Update transform origin based on cursor/touch position for intuitive zoom
+function setTransformOriginFromEvent(evt) {
+    const rect = zoomContainer.getBoundingClientRect();
+    let clientX, clientY;
+    if (evt.touches && evt.touches.length) {
+        clientX = evt.touches[0].clientX;
+        clientY = evt.touches[0].clientY;
+    } else {
+        clientX = evt.clientX;
+        clientY = evt.clientY;
+    }
+    const x = ((clientX - rect.left) / rect.width) * 100;
+    const y = ((clientY - rect.top) / rect.height) * 100;
+    mainImage.style.transformOrigin = `${x}% ${y}%`;
+}
+
+zoomContainer.addEventListener('mousemove', (e) => {
+    if (isZoomed) setTransformOriginFromEvent(e);
+});
+
+zoomContainer.addEventListener('touchmove', (e) => {
+    if (isZoomed) setTransformOriginFromEvent(e);
+}, { passive: true });
+
 // Video Controls for Product Section
 const productVideo = document.getElementById('productVideo');
 const videoControls = document.getElementById('videoControls');
