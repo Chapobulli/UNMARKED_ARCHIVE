@@ -58,7 +58,14 @@ body {
     width: 120px;
     height: 120px;
     object-fit: contain;
-    opacity: 0.9;
+    animation: fadeInScale 0.8s ease;
+}
+
+.loading-logo-gif {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
     animation: fadeInScale 0.8s ease;
 }
 
@@ -144,6 +151,36 @@ body {
 .header-logo-img {
     height: 40px;
     width: auto;
+    display: block;
+}
+
+.header-logo-video {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* Logo Banner */
+.logo-banner {
+    background: var(--color-bg);
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.logo-banner-video {
+    max-width: 300px;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+}
+
+.hero-logo-video {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
     display: block;
 }
 
@@ -263,6 +300,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    margin-top: 4rem;
 }
 
 .hero-title {
