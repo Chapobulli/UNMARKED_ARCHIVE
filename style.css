@@ -1459,6 +1459,45 @@ body {
     .social-proof {
         font-size: 0.8rem;
     }
+
+    .newsletter-form {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .newsletter-form .btn {
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+    }
+
+    .footer {
+        padding: 2rem 0;
+    }
+
+    .footer-content {
+        gap: 1.5rem;
+    }
+
+    .footer-col {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-col:last-child {
+        align-items: center;
+    }
+
+    .footer-link {
+        font-size: 0.75rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .footer-text {
+        font-size: 0.75rem;
+    }
 }
 
 /* Video Controls */
