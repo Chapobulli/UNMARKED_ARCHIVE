@@ -1,10 +1,20 @@
-// Loading Screen
-window.addEventListener('load', () => {
+// Loading Screen - More Reliable
+document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loadingScreen');
     if (loadingScreen) {
         setTimeout(() => {
             loadingScreen.classList.add('hidden');
-        }, 1000);
+        }, 1200);
+    }
+});
+
+// Fallback: Hide loading screen on window load too
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 500);
     }
 });
 

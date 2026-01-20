@@ -23,6 +23,10 @@ body {
     letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
     cursor: crosshair;
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Loading Screen */
@@ -37,11 +41,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    visibility: visible;
 }
 
 .loading-screen.hidden {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
 
@@ -115,7 +121,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 /* Header */
@@ -1276,6 +1282,76 @@ body {
 
     .footer-col {
         align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .header .container {
+        gap: 0.5rem;
+    }
+
+    .nav {
+        gap: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .language-switcher {
+        gap: 0.25rem;
+    }
+
+    .lang-link {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .hero-section {
+        padding: 2rem 0 3rem;
+    }
+
+    .hero-content {
+        gap: 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        letter-spacing: 0.15rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.85rem;
+        letter-spacing: 0.08rem;
+    }
+
+    .countdown {
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .countdown-value {
+        font-size: 1.2rem;
+    }
+
+    .countdown-label {
+        font-size: 0.65rem;
+    }
+
+    .video-control-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 0.9rem;
+    }
+
+    .loading-logo {
+        font-size: 1.2rem;
+        letter-spacing: 0.15rem;
+    }
+
+    .loading-bar {
+        width: 150px;
     }
 }
 
