@@ -1399,11 +1399,14 @@ body {
 
     .flow-block img,
     .flow-block video {
-        width: calc(100% - 2rem);
-        max-height: 50vh;
-        padding: 0 1rem;
-        margin: 0 auto;
-        border-radius: 12px;
+        width: calc(100% - 2rem) !important;
+        max-width: calc(100% - 2rem) !important;
+        max-height: 45vh !important;
+        min-height: auto !important;
+        padding: 0 1rem !important;
+        margin: 0 auto !important;
+        border-radius: 12px !important;
+        object-fit: contain !important;
     }
 
     .media-badge {
