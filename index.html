@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNMARKED ARCHIVE – SAMPLE DROP</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Exclusive streetwear preorder. UNMARKED ARCHIVE SAMPLE 001 – Limited edition sweater. Minimalist aesthetic.">
+    <meta name="keywords" content="unmarked, streetwear, minimal fashion, preorder, limited edition, sweater">
+    <meta name="author" content="UNMARKED ARCHIVE">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="UNMARKED ARCHIVE – SAMPLE 001">
+    <meta property="og:description" content="Exclusive streetwear preorder. Limited edition drop.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://unmarkedarchive.com">
+    <meta property="og:image" content="/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UNMARKED ARCHIVE – SAMPLE 001">
+    <meta name="twitter:description" content="Exclusive streetwear preorder. Limited edition drop.">
+    <meta name="twitter:image" content="/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <img src="assets/images/logo.png" alt="UNMARKED ARCHIVE" class="loading-logo-img" />
+            <h1 class="loading-logo">UNMARKED ARCHIVE</h1>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/images/logo.png" alt="UNMARKED ARCHIVE" class="header-logo-img" />
+                <h1 class="logo">UNMARKED ARCHIVE</h1>
+            </a>
+            <nav class="nav">
+                <a href="#product" class="nav-link">SAMPLE</a>
+                <a href="#contact" class="nav-link">PREORDER</a>
+                <a href="lookbook.html" class="nav-link">LOOKBOOK</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <img src="assets/images/gif background.gif" alt="" class="hero-background" loading="lazy" />
+        <video class="hero-video" id="heroVideo" autoplay playsinline preload="metadata" loop muted>
+            <source src="assets/videos/video-1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-controls" id="heroControls" style="display:flex;">
+            <button class="video-control-btn" id="heroMuteBtn" title="Mute">🔇</button>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">SAMPLE 001</h2>
+                <p class="hero-subtitle">EXCLUSIVE FIRST DROP</p>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">00</span>
+                        <span class="countdown-label">DAYS</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">00</span>
+                        <span class="countdown-label">HOURS</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">00</span>
+                        <span class="countdown-label">MIN</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">00</span>
+                        <span class="countdown-label">SEC</span>
+                    </div>
+                </div>
+                
+                <p class="hero-description">
+                    Limited pre-order only. Contact us to secure your sample. 
+                    Orders placed now ship March 2026.
+                </p>
+                
+                <a href="#contact" class="btn btn-primary">RESERVE NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="product-section" id="product">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-image">
+                    <div class="product-gallery">
+                        <div class="gallery-zoom-container" id="zoomContainer">
+                            <img src="assets/product/product-black.png" alt="UNMARKED SWEATER BLACK" class="gallery-image active" id="mainImage" loading="lazy" draggable="false">
+                            <div class="zoom-indicator" id="zoomIndicator">🔎 DOUBLE CLICK TO ZOOM</div>
+                        </div>
+                        <div class="gallery-thumbs">
+                            <img src="assets/product/product-black.png" alt="Black" class="thumb active" data-index="0" loading="lazy">
+                            <img src="assets/product/product-white.png" alt="White" class="thumb" data-index="1" loading="lazy">
+                            <img src="assets/product/product-brown.png" alt="Brown" class="thumb" data-index="2" loading="lazy">
+                            <img src="assets/product/product-grey.png" alt="Grey" class="thumb" data-index="3" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">UNMARKED SWEATER 001</h3>
+                    <p class="product-price">PREZZO DA DEFINIRE</p>
+                    <p class="price-note">Il prezzo finale sarà deciso in base ai feedback dei preorder</p>
+                    <ul class="product-features">
+                        <li>100% COTTON</li>
+                        <li>LOOSE / OVERSIZED FIT</li>
+                        <li>MINIMAL / CLEAN DESIGN</li>
+                        <li>STREET / ARCHIVE STYLE</li>
+                    </ul>
+                    <div class="product-sizes">
+                        <span class="size-label">AVAILABLE SIZES:</span>
+                        <span class="sizes">S / M / L / XL / XXL</span>
+                        <button class="size-guide-btn" id="sizeGuideBtn">SIZE GUIDE</button>
+                    </div>
+                    
+                    <!-- Social Proof Badge -->
+                    <div class="social-proof">
+                        <span class="proof-icon">🔥</span>
+                        <span class="proof-text"><strong id="preorderCount">23</strong> PREORDERS PLACED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Preorder Form -->
+    <section class="contact-section" id="contact" style="background-image: url('assets/images/background-1.png'); background-size: cover; background-position: center;">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <h2 class="section-title">PREORDER NOW</h2>
+            <p class="section-subtitle">Fill the form to reserve your sample. We'll contact you with payment details.</p>
+            <p class="preorder-note"><a href="faq.html#preorder">PREORDER IS FREE - NO PAYMENT REQUIRED NOW</a></p>
+            
+            <form class="contact-form" id="preorderForm">
+                <div class="form-group">
+                    <label for="name">NAME *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">EMAIL *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">PHONE</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="color">COLOR *</label>
+                    <select id="color" name="color" required>
+                        <option value="">SELECT COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="BROWN">BROWN</option>
+                        <option value="GREY">GREY</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="size">SIZE *</label>
+                    <select id="size" name="size" required>
+                        <option value="">SELECT SIZE</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestedPrice">QUANTO SARESTI DISPOSTO A PAGARE? *</label>
+                    <select id="suggestedPrice" name="suggestedPrice" required>
+                        <option value="">SELEZIONA FASCIA DI PREZZO</option>
+                        <option value="€40-50">€40-50</option>
+                        <option value="€50-60">€50-60</option>
+                        <option value="€60-70">€60-70</option>
+                        <option value="€70-80">€70-80</option>
+                        <option value="€80-90">€80-90</option>
+                        <option value="€90-100">€90-100</option>
+                        <option value="€100+">€100+</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">NOTE (OPTIONAL)</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                        <span>ACCONSENTO AL TRATTAMENTO DEI DATI PER GESTIRE IL MIO PREORDER (VEDI <a href="privacy.html" target="_blank" rel="noopener">PRIVACY</a>)</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-submit">SUBMIT PREORDER</button>
+                <p class="form-note" id="formMessage"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" style="background-image: url('assets/images/product-2.png'); background-size: cover; background-position: center;">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <h3 class="newsletter-title">FOLLOW US FOR NEWS</h3>
+            <p class="newsletter-subtitle">Drops, restock alerts, and updates on Instagram & TikTok</p>
+            <div class="newsletter-form" style="justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://www.instagram.com/unmarked_archive.brand" target="_blank" rel="noopener" class="btn btn-secondary">INSTAGRAM</a>
+                <a href="https://www.tiktok.com/@unmarked_archive" target="_blank" rel="noopener" class="btn btn-secondary">TIKTOK</a>
+            </div>
+            <p class="newsletter-message" id="newsletterMessage"></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <p class="footer-text">© 2026 UNMARKED ARCHIVE. ALL RIGHTS RESERVED.</p>
+                </div>
+                <div class="footer-col">
+                    <a href="https://www.instagram.com/unmarked_archive.brand" class="footer-link" target="_blank" rel="noopener">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@unmarked_archive" class="footer-link" target="_blank" rel="noopener">TIKTOK</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="lookbook.html" class="footer-link">LOOKBOOK</a>
+                    <a href="faq.html#terms" class="footer-link">TERMS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Size Guide Modal -->
+    <div class="modal" id="sizeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h3 class="modal-title">SIZE GUIDE</h3>
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>SIZE</th>
+                        <th>CHEST (CM)</th>
+                        <th>LENGTH (CM)</th>
+                        <th>SHOULDERS (CM)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S</td>
+                        <td>98</td>
+                        <td>66</td>
+                        <td>48</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>106</td>
+                        <td>70</td>
+                        <td>52</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>114</td>
+                        <td>74</td>
+                        <td>56</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>122</td>
+                        <td>78</td>
+                        <td>60</td>
+                    </tr>
+                    <tr>
+                        <td>XXL</td>
+                        <td>130</td>
+                        <td>82</td>
+                        <td>64</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="size-note">MEASUREMENTS ARE APPROXIMATE. OVERSIZED FIT.</p>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content image-modal-content">
+            <button class="modal-close" id="imageModalClose">&times;</button>
+            <img class="image-modal-img" id="imageModalImg" src="assets/product/product-black.png" alt="Product zoom">
+            <div class="image-modal-hint">Scroll to zoom • Drag to pan • Click to close</div>
+        </div>
+    </div>
+
+    <!-- Google Analytics (replace with your ID) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+
+    <script src="script.js"></script>
+</body>
+</html>

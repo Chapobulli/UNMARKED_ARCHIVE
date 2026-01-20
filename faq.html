@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ – UNMARKED ARCHIVE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .faq-hero {
+            padding: 6rem 0 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .faq-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .faq-hero p {
+            color: var(--color-text-muted);
+            letter-spacing: 0.08rem;
+        }
+
+        .faq-section {
+            padding: 4rem 0 6rem;
+        }
+
+        .faq-category {
+            margin-bottom: 4rem;
+        }
+
+        .faq-category h2 {
+            font-size: 1.8rem;
+            letter-spacing: 0.16rem;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        .faq-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .faq-answer {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .faq-answer strong {
+            color: var(--color-text);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            border: 1px solid var(--color-border);
+            text-decoration: none;
+            color: var(--color-text);
+            text-transform: uppercase;
+            letter-spacing: 0.12rem;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            background: var(--color-text);
+            color: var(--color-bg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/images/logo.png" alt="UNMARKED ARCHIVE" class="header-logo-img" />
+                <h1 class="logo">UNMARKED ARCHIVE</h1>
+            </a>
+            <nav class="nav">
+                <a href="index.html#product" class="nav-link">SAMPLE</a>
+                <a href="index.html#contact" class="nav-link">PREORDER</a>
+                <a href="lookbook.html" class="nav-link">LOOKBOOK</a>
+                <a href="privacy.html" class="nav-link">PRIVACY</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>FREQUENTLY ASKED QUESTIONS</h1>
+            <p>Everything you need to know about UNMARKED ARCHIVE SAMPLE 001</p>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-section">
+        <div class="container">
+            <!-- Preorder Info -->
+            <div class="faq-category" id="preorder">
+                <h2>PREORDER INFO</h2>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">What is a preorder?</h3>
+                    <p class="faq-answer">A preorder is a <strong>non-binding interest expression</strong>. By filling the form, you are <strong>NOT making a purchase</strong> and <strong>NO payment is required</strong> at this stage. You are simply expressing your interest in the product.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Do I need to pay now?</h3>
+                    <p class="faq-answer"><strong>NO</strong>. This preorder form is <strong>100% FREE</strong>. Payment will be requested <strong>only after production confirmation</strong>, via email or Instagram DM. You can still decide not to purchase when we contact you.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How will you contact me for payment?</h3>
+                    <p class="faq-answer">We will contact you via <strong>email</strong> or <strong>Instagram DM (@unmarked_archive.brand)</strong> with production details and payment options. Payment is optional at that point.</p>
+                </div>
+            </div>
+
+            <!-- Ordering & Shipping -->
+            <div class="faq-category">
+                <h2>ORDERING & SHIPPING</h2>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I place a preorder?</h3>
+                    <p class="faq-answer">Fill out the preorder form on our homepage with your details (name, email, size, color). We'll contact you via Instagram DM with payment details.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">When will my order ship?</h3>
+                    <p class="faq-answer">This is a <strong>preorder</strong>. Production begins after payment confirmation. Estimated shipping: <strong>March 2026</strong>.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you ship internationally?</h3>
+                    <p class="faq-answer">Yes! We ship worldwide. Shipping costs will be confirmed when we contact you with payment details.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How long does shipping take?</h3>
+                    <p class="faq-answer">Standard shipping: 5-10 business days. Express available on request.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I track my order?</h3>
+                    <p class="faq-answer">Yes! You'll receive a tracking number via email once your order ships.</p>
+                </div>
+            </div>
+
+            <!-- Product Information -->
+            <div class="faq-category">
+                <h2>PRODUCT INFORMATION</h2>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">What size should I order?</h3>
+                    <p class="faq-answer">This is an <strong>oversized fit</strong>. Check the size guide on the main page for exact measurements. If between sizes, we recommend sizing down.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What material is the sweater?</h3>
+                    <p class="faq-answer"><strong>100% cotton</strong>, heavyweight, minimalist design, made in Europe.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How should I care for my item?</h3>
+                    <p class="faq-answer">Machine wash cold, inside out. Hang dry or tumble dry low. Do not bleach. Iron on low if needed.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Is this a limited edition?</h3>
+                    <p class="faq-answer">Yes. This is SAMPLE 001, a limited preorder drop. Once sold out, we won't restock this exact design.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What colors are available?</h3>
+                    <p class="faq-answer">Black, White, Brown, and Grey.</p>
+                </div>
+            </div>
+
+            <!-- Returns & Exchanges -->
+            <div class="faq-category">
+                <h2>RETURNS & EXCHANGES</h2>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I cancel my preorder?</h3>
+                    <p class="faq-answer">Yes, you can cancel <strong>before production starts</strong>. Contact us via Instagram DM immediately.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What is your return policy?</h3>
+                    <p class="faq-answer">Returns accepted within <strong>14 days</strong> of delivery. Item must be unworn, unwashed, with original tags. Contact us first before returning.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I exchange sizes?</h3>
+                    <p class="faq-answer">Size exchanges subject to availability. Contact us immediately upon receiving your order if size doesn't fit.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">What if my item arrives damaged?</h3>
+                    <p class="faq-answer">Contact us within <strong>48 hours</strong> with photos. We'll arrange a replacement or refund immediately.</p>
+                </div>
+            </div>
+
+            <!-- Brand & Contact -->
+            <div class="faq-category">
+                <h2>ABOUT & CONTACT</h2>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">What is UNMARKED ARCHIVE?</h3>
+                    <p class="faq-answer">Independent streetwear brand focused on minimalist aesthetic. Limited drops, high quality construction, made in Europe.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">How can I contact you?</h3>
+                    <p class="faq-answer">DM us on Instagram <strong>@unmarked_archive.brand</strong>. We typically respond within 24 hours.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you have social media?</h3>
+                    <p class="faq-answer">Follow us on Instagram @unmarked_archive.brand and TikTok @unmarked_archive for updates, behind-the-scenes, and future drops.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">When is the next drop?</h3>
+                    <p class="faq-answer">Subscribe to our newsletter on the homepage to be notified about future drops and exclusive releases.</p>
+                </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="faq-category" id="terms">
+                <h2>TERMS & CONDITIONS</h2>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Preorder policy</h3>
+                    <p class="faq-answer">This is a preorder. Production starts after payment confirmation. Estimated ship: March 2026.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Payment</h3>
+                    <p class="faq-answer">We accept all major payment methods. Payment details will be provided via Instagram DM after you submit your preorder form.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Refunds</h3>
+                    <p class="faq-answer">Refunds processed within 7-14 business days after we receive the returned item in original condition.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Product accuracy</h3>
+                    <p class="faq-answer">Colors may vary slightly due to displays and production tolerances.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Data & privacy</h3>
+                    <p class="faq-answer">We collect only the data you provide for fulfilling your preorder (name, contact, size/color). Reach out via Instagram for any data requests.</p>
+                </div>
+            </div>
+
+            <a href="index.html" class="back-link">← BACK TO HOME</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <p class="footer-text">© 2026 UNMARKED ARCHIVE. ALL RIGHTS RESERVED.</p>
+                </div>
+                <div class="footer-col">
+                    <a href="https://www.instagram.com/unmarked_archive.brand" class="footer-link" target="_blank" rel="noopener">INSTAGRAM</a>
+                    <a href="https://www.tiktok.com/@unmarked_archive" class="footer-link" target="_blank" rel="noopener">TIKTOK</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="#terms" class="footer-link">TERMS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
