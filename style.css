@@ -1386,6 +1386,51 @@ body {
     .loading-bar {
         width: 150px;
     }
+
+    .product-section {
+        padding: 2rem 0 3rem;
+    }
+
+    .product-grid {
+        gap: 1rem;
+    }
+
+    .gallery-zoom-container {
+        aspect-ratio: auto;
+        max-height: 400px;
+    }
+
+    .gallery-thumbs {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+
+    .product-title {
+        font-size: 1.3rem;
+        letter-spacing: 0.12rem;
+    }
+
+    .product-price {
+        font-size: 0.95rem;
+    }
+
+    .product-features {
+        font-size: 0.85rem;
+    }
+
+    .size-label,
+    .sizes {
+        font-size: 0.8rem;
+    }
+
+    .size-guide-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .social-proof {
+        font-size: 0.8rem;
+    }
 }
 
 /* Video Controls */
