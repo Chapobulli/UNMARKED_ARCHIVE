@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <link rel="stylesheet" href="style.css?v=2.1">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -79,29 +79,19 @@
                 <h2 class="hero-title">SAMPLE 001</h2>
                 <p class="hero-subtitle">ESCLUSIVO PRIMO DROP</p>
                 
-                <!-- Countdown Timer -->
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="days">00</span>
-                        <span class="countdown-label">GIORNI</span>
+                <!-- Stato Produzione -->
+                <div class="production-status">
+                    <div class="loader-ring">
+                        <div></div><div></div><div></div><div></div>
                     </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="hours">00</span>
-                        <span class="countdown-label">ORE</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="minutes">00</span>
-                        <span class="countdown-label">MIN</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-value" id="seconds">00</span>
-                        <span class="countdown-label">SEC</span>
+                    <div class="production-text">
+                        <span class="status-kicker">CODA PREORDER</span>
+                        <p>Stiamo chiudendo le quantità dai preorder prima di far partire la produzione. Resta connesso mentre chiudiamo il batch.</p>
                     </div>
                 </div>
-                
+
                 <p class="hero-description">
-                    Preorder esclusivo. Contattaci per assicurare il tuo campione. 
-                    Gli ordini effettuati adesso verranno spediti a marzo 2026.
+                    Preorder esclusivo: blocchiamo i pezzi e poi partiamo con la produzione. Spedizione stimata marzo 2026.
                 </p>
                 
                 <a href="#contact" class="btn btn-primary">PRENOTA ORA</a>
@@ -117,7 +107,7 @@
                 <div class="product-image">
                     <div class="product-gallery">
                         <div class="gallery-zoom-container" id="zoomContainer">
-                            <img src="assets/product/product-black.png" alt="UNMARKED SWEATER BLACK" class="gallery-image active" id="mainImage" loading="lazy" draggable="false">
+                            <img src="assets/product/product-front-black.jpeg" alt="FELPA UNMARKED ARCHIVE" class="gallery-image active" id="mainImage" loading="lazy" draggable="false">
                             <div class="zoom-indicator" id="zoomIndicator">🔎 DOPPIO CLICK PER ZOOM</div>
                         </div>
                         <div class="gallery-thumbs">
@@ -125,6 +115,7 @@
                             <img src="assets/product/product back black.png" alt="Retro" class="thumb" data-index="1" loading="lazy">
                             <img src="assets/product/product zip puller.jpeg" alt="Dettaglio Zip" class="thumb" data-index="2" loading="lazy">
                             <img src="assets/product/product hood.jpeg" alt="Dettaglio Cappuccio" class="thumb" data-index="3" loading="lazy">
+                            <img src="assets/product/product outside patch.jpeg" alt="Dettaglio Patch" class="thumb" data-index="4" loading="lazy">
                         </div>
                     </div>
                 </div>

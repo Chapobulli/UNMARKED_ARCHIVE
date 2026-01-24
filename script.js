@@ -25,7 +25,8 @@ const productImages = [
     'assets/product/product-front-black.jpeg',
     'assets/product/product back black.png',
     'assets/product/product zip puller.jpeg',
-    'assets/product/product hood.jpeg'
+    'assets/product/product hood.jpeg',
+    'assets/product/product outside patch.jpeg'
 ];
 
 if (mainImage && thumbs.length) {
@@ -42,46 +43,7 @@ if (mainImage && thumbs.length) {
     });
 }
 
-// Countdown Timer - Set end date (14 days from now)
-const countdownDate = new Date();
-countdownDate.setDate(countdownDate.getDate() + 14);
-countdownDate.setHours(23, 59, 59);
-
-function updateCountdown() {
-    // Only update countdown if elements exist (skip on lookbook page)
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-    const countdownEl = document.getElementById('countdown');
-    
-    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
-        return; // Skip countdown if elements don't exist
-    }
-
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    daysEl.textContent = String(days).padStart(2, '0');
-    hoursEl.textContent = String(hours).padStart(2, '0');
-    minutesEl.textContent = String(minutes).padStart(2, '0');
-    secondsEl.textContent = String(seconds).padStart(2, '0');
-
-    if (distance < 0) {
-        clearInterval(countdownInterval);
-        if (countdownEl) {
-            countdownEl.innerHTML = '<p>PREORDER NOW OPEN</p>';
-        }
-    }
-}
-
-const countdownInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
+// Countdown removed: production wait is communicated via hero loader.
 
 // Video Controls (if video exists)
 const productVideo = document.getElementById('productVideo');
