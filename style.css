@@ -376,27 +376,28 @@ body {
     backdrop-filter: blur(6px);
 }
 
-.loader-ring {
-    position: relative;
-    width: 54px;
-    height: 54px;
+.loader-bars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.2rem;
+    width: 200px;
+    max-width: 60vw;
 }
 
-.loader-ring div {
-    box-sizing: border-box;
+.loader-bars .bar {
     display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px solid var(--color-text);
-    border-color: var(--color-text) transparent var(--color-text) transparent;
-    border-radius: 50%;
-    animation: loaderRing 1.2s linear infinite;
+    height: 14px;
+    background: linear-gradient(90deg, var(--color-accent), #00b2a9, var(--color-accent));
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.45);
+    animation: barFill 1.4s ease-in-out infinite;
 }
 
-.loader-ring div:nth-child(1) { animation-delay: -0.45s; }
-.loader-ring div:nth-child(2) { animation-delay: -0.3s; }
-.loader-ring div:nth-child(3) { animation-delay: -0.15s; }
+.loader-bars .bar:nth-child(1) { animation-delay: 0s; }
+.loader-bars .bar:nth-child(2) { animation-delay: 0.08s; }
+.loader-bars .bar:nth-child(3) { animation-delay: 0.16s; }
+.loader-bars .bar:nth-child(4) { animation-delay: 0.24s; }
+.loader-bars .bar:nth-child(5) { animation-delay: 0.32s; }
 
 .production-text {
     display: flex;
@@ -417,9 +418,11 @@ body {
     max-width: 360px;
 }
 
-@keyframes loaderRing {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes barFill {
+    0%   { transform: scaleY(0.4); opacity: 0.6; filter: saturate(0.8); }
+    40%  { transform: scaleY(1); opacity: 1; filter: saturate(1.2); }
+    80%  { transform: scaleY(0.5); opacity: 0.75; filter: saturate(1); }
+    100% { transform: scaleY(0.4); opacity: 0.6; filter: saturate(0.8); }
 }
 
 /* Buttons */
@@ -1470,9 +1473,8 @@ body {
         gap: 0.5rem;
     }
 
-    .loader-ring {
-        width: 44px;
-        height: 44px;
+    .loader-bars {
+        width: 160px;
     }
 
     .product-title {
