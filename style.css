@@ -405,9 +405,11 @@ body {
 }
 
 .production-text .status-kicker {
-    font-size: 0.75rem;
-    letter-spacing: 0.18rem;
-    color: var(--color-accent);
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1rem;
+    letter-spacing: 0.08rem;
+    color: var(--color-text);
+    text-transform: none;
 }
 
 .production-text p {
