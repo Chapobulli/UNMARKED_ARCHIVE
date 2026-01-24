@@ -23,9 +23,9 @@ const mainImage = document.getElementById('mainImage');
 const thumbs = document.querySelectorAll('.thumb');
 const productImages = [
     'assets/product/product-front-black.jpeg',
-    'assets/product/product-front-black.jpeg',
-    'assets/product/product-front-black.jpeg',
-    'assets/product/product-front-black.jpeg'
+    'assets/product/product back black.png',
+    'assets/product/product zip puller.jpeg',
+    'assets/product/product outside patch.jpeg'
 ];
 
 if (mainImage && thumbs.length) {
