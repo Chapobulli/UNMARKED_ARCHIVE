@@ -25,7 +25,7 @@ const productImages = [
     'assets/product/product-front-black.jpeg',
     'assets/product/product back black.png',
     'assets/product/product zip puller.jpeg',
-    'assets/product/product hood.jpeg',
+    'assets/product/product hood.png',
     'assets/product/product outside patch.jpeg',
     'assets/product/product inside patch.jpeg'
 ];
