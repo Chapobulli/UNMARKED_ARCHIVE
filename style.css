@@ -30,6 +30,17 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Global link reset for consistent styling */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-hover);
+    text-decoration: underline;
+}
+
 /* Loading Screen */
 .loading-screen {
     position: fixed;
