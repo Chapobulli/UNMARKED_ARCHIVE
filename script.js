@@ -22,10 +22,10 @@ window.addEventListener('load', () => {
 const mainImage = document.getElementById('mainImage');
 const thumbs = document.querySelectorAll('.thumb');
 const productImages = [
-    'assets/product/product-black.png',
-    'assets/product/product-white.png',
-    'assets/product/product-brown.png',
-    'assets/product/product-grey.png'
+    'assets/product/product-front-black.jpeg',
+    'assets/product/product-front-black.jpeg',
+    'assets/product/product-front-black.jpeg',
+    'assets/product/product-front-black.jpeg'
 ];
 
 if (mainImage && thumbs.length) {
