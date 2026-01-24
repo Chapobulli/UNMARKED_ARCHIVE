@@ -26,7 +26,8 @@ const productImages = [
     'assets/product/product back black.png',
     'assets/product/product zip puller.jpeg',
     'assets/product/product hood.jpeg',
-    'assets/product/product outside patch.jpeg'
+    'assets/product/product outside patch.jpeg',
+    'assets/product/product inside patch.jpeg'
 ];
 
 if (mainImage && thumbs.length) {
