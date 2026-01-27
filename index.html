@@ -105,19 +105,30 @@
         <div class="container">
             <div class="product-grid">
                 <div class="product-image">
-                    <div class="product-gallery">
-                        <div class="gallery-zoom-container" id="zoomContainer">
-                            <img src="assets/product/product-front-black.jpeg" alt="UNMARKED HOODIE BLACK" class="gallery-image active" id="mainImage" loading="lazy" draggable="false">
-                            <div class="zoom-indicator" id="zoomIndicator">🔎 DOUBLE CLICK TO ZOOM</div>
+                    <div class="product-carousel" id="productCarousel">
+                        <button class="carousel-arrow carousel-arrow-prev" id="carouselPrev" aria-label="Previous image">‹</button>
+                        <button class="carousel-arrow carousel-arrow-next" id="carouselNext" aria-label="Next image">›</button>
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <img src="assets/product/product-front-black.jpeg" alt="UNMARKED HOODIE BLACK" class="carousel-image" loading="lazy" draggable="false">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/product/product back black.png" alt="Back View" class="carousel-image" loading="lazy" draggable="false">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/product/product zip puller.jpeg" alt="Zip Detail" class="carousel-image" loading="lazy" draggable="false">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/product/product hood.png" alt="Hood Detail" class="carousel-image" loading="lazy" draggable="false">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/product/product outside patch.jpeg" alt="Patch Detail" class="carousel-image" loading="lazy" draggable="false">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/product/product inside patch.jpeg" alt="Label Detail" class="carousel-image" loading="lazy" draggable="false">
+                            </div>
                         </div>
-                        <div class="gallery-thumbs">
-                            <img src="assets/product/product-front-black.jpeg" alt="Front" class="thumb active" data-index="0" loading="lazy">
-                            <img src="assets/product/product back black.png" alt="Back" class="thumb" data-index="1" loading="lazy">
-                            <img src="assets/product/product zip puller.jpeg" alt="Zip Detail" class="thumb" data-index="2" loading="lazy">
-                            <img src="assets/product/product hood.png" alt="Hood Detail" class="thumb" data-index="3" loading="lazy">
-                            <img src="assets/product/product outside patch.jpeg" alt="Patch Detail" class="thumb" data-index="4" loading="lazy">
-                            <img src="assets/product/product inside patch.jpeg" alt="Label Detail" class="thumb" data-index="5" loading="lazy">
-                        </div>
+                        <div class="carousel-indicator" id="carouselIndicator">SCROLL TO EXPLORE</div>
                     </div>
                 </div>
                 <div class="product-info">

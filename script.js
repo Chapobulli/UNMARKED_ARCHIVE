@@ -18,29 +18,106 @@ window.addEventListener('load', () => {
     }
 });
 
-// Product Gallery
-const mainImage = document.getElementById('mainImage');
-const thumbs = document.querySelectorAll('.thumb');
-const productImages = [
-    'assets/product/product-front-black.jpeg',
-    'assets/product/product back black.png',
-    'assets/product/product zip puller.jpeg',
-    'assets/product/product hood.png',
-    'assets/product/product outside patch.jpeg',
-    'assets/product/product inside patch.jpeg'
-];
+// Product Carousel - Rick Owens style horizontal scroll with parallax
+const productCarousel = document.getElementById('productCarousel');
+const carouselPrev = document.getElementById('carouselPrev');
+const carouselNext = document.getElementById('carouselNext');
 
-if (mainImage && thumbs.length) {
-    thumbs.forEach((thumb, index) => {
-        thumb.addEventListener('click', () => {
-            thumbs.forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-            mainImage.style.opacity = '0';
-            setTimeout(() => {
-                mainImage.src = productImages[index];
-                mainImage.style.opacity = '1';
-            }, 120);
+if (productCarousel) {
+    const slides = productCarousel.querySelectorAll('.carousel-slide');
+    const images = productCarousel.querySelectorAll('.carousel-image');
+    let currentSlide = 0;
+    
+    // Arrow navigation
+    if (carouselPrev && carouselNext) {
+        carouselPrev.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                scrollToSlide(currentSlide);
+            }
         });
+        
+        carouselNext.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                scrollToSlide(currentSlide);
+            }
+        });
+    }
+    
+    function scrollToSlide(index) {
+        const slide = slides[index];
+        if (slide) {
+            productCarousel.scrollTo({
+                left: slide.offsetLeft,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Update current slide on scroll
+    productCarousel.addEventListener('scroll', () => {
+        const scrollLeft = productCarousel.scrollLeft;
+        const containerWidth = productCarousel.offsetWidth;
+        
+        // Determine current slide
+        slides.forEach((slide, index) => {
+            const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+            const scrollCenter = scrollLeft + containerWidth / 2;
+            if (Math.abs(slideCenter - scrollCenter) < containerWidth / 2) {
+                currentSlide = index;
+            }
+        });
+        
+        // Parallax effect
+        slides.forEach((slide, index) => {
+            const slideLeft = slide.offsetLeft;
+            const slideOffset = scrollLeft - slideLeft + containerWidth / 2;
+            const parallaxAmount = slideOffset * 0.15;
+            
+            const img = images[index];
+            if (img) {
+                img.style.transform = `translateX(${parallaxAmount}px) scale(1.1)`;
+            }
+        });
+    });
+    
+    // Smooth drag scrolling
+    let isDown = false;
+    let startX;
+    let scrollLeftStart;
+    
+    productCarousel.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('carousel-arrow')) return;
+        isDown = true;
+        productCarousel.style.cursor = 'grabbing';
+        startX = e.pageX - productCarousel.offsetLeft;
+        scrollLeftStart = productCarousel.scrollLeft;
+        e.preventDefault();
+    });
+    
+    productCarousel.addEventListener('mouseleave', () => {
+        isDown = false;
+        productCarousel.style.cursor = 'grab';
+    });
+    
+    productCarousel.addEventListener('mouseup', () => {
+        isDown = false;
+        productCarousel.style.cursor = 'grab';
+    });
+    
+    productCarousel.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - productCarousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        productCarousel.scrollLeft = scrollLeftStart - walk;
+    });
+    
+    // Prevent context menu on images
+    images.forEach(img => {
+        img.addEventListener('contextmenu', (e) => e.preventDefault());
+        img.addEventListener('dragstart', (e) => e.preventDefault());
     });
 }
 
@@ -304,7 +381,6 @@ window.addEventListener('DOMContentLoaded', () => {
 const imageModal = document.getElementById('imageModal');
 const imageModalClose = document.getElementById('imageModalClose');
 const imageModalImg = document.getElementById('imageModalImg');
-const zoomContainer = document.getElementById('zoomContainer');
 
 if (imageModal && imageModalClose && imageModalImg && mainImage) {
     let scale = 1;
