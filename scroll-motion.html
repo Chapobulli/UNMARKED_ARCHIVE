@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNMARKED ARCHIVE — Scroll Text Motion</title>
+    <meta name="description" content="On-scroll text motion inspired by Codrops, adapted for UNMARKED ARCHIVE." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="scroll-motion.css" />
+    <script>document.documentElement.className = 'js';</script>
+</head>
+<body class="demo-ua">
+    <header class="frame">
+        <h1 class="frame__title">UNMARKED ARCHIVE · Scroll Text Motion</h1>
+        <a class="frame__back" href="index.html">Back to site</a>
+        <a class="frame__github" href="https://github.com/codrops/ScrollTextMotion" target="_blank" rel="noopener">Original demo</a>
+        <nav class="frame__tags">
+            <span>#scroll</span>
+            <span>#gsap</span>
+            <span>#kinetic-type</span>
+        </nav>
+    </header>
+
+    <div class="logo fixed"><span>UNMARKED ARCHIVE</span></div>
+
+    <main id="smooth-content">
+        <div class="content">
+            <div class="group">
+                <div class="el el--xl pos-1" data-alt-pos="pos-3">UNMARKED</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-2" data-alt-pos="pos-4">ARCHIVE PIECE 001</div>
+                <div class="el pos-2" data-alt-pos="pos-4">HEAVYWEIGHT 450 GSM</div>
+                <div class="el pos-2" data-alt-pos="pos-4">DIAMOND ZIP PULLER</div>
+                <div class="el pos-2" data-alt-pos="pos-4">OVERSIZED CUT</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-3" data-alt-pos="pos-1">BLACK / WHITE</div>
+                <div class="el pos-3" data-alt-pos="pos-1">MONOCHROME</div>
+                <div class="el pos-3" data-alt-pos="pos-1">RAW TEXTURE</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-2" data-alt-pos="pos-4" data-scramble-duration="2">SAMPLE</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-4" data-alt-pos="pos-2">ON-BODY MOTION</div>
+                <div class="el pos-4" data-alt-pos="pos-2">STREET ONLY</div>
+                <div class="el pos-4" data-alt-pos="pos-2">NO STUDIO LIGHT</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-3" data-alt-pos="pos-1" data-scramble-duration="2">001</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-1" data-alt-pos="pos-3">PREORDER OPEN</div>
+                <div class="el pos-1" data-alt-pos="pos-3">MADE IN EUROPE</div>
+                <div class="el pos-1" data-alt-pos="pos-3">LIMITED DROP</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-2" data-alt-pos="pos-5" data-scramble-duration="2.5">UA</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-2" data-alt-pos="pos-4">HEAVY COTTON</div>
+                <div class="el pos-2" data-alt-pos="pos-4">ARCHIVE EMBROIDERY</div>
+                <div class="el pos-2" data-alt-pos="pos-4">TACTILE LOGO</div>
+                <div class="el pos-2" data-alt-pos="pos-4">HAND FEEL</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-1" data-alt-pos="pos-3" data-scramble-duration="2.5">M</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-3" data-alt-pos="pos-5">URBAN GRIT</div>
+                <div class="el pos-3" data-alt-pos="pos-5">RAW SOUND</div>
+                <div class="el pos-3" data-alt-pos="pos-5">GOTHIC MINIMAL</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-2" data-alt-pos="pos-3" data-scramble-duration="2.5">A</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-1" data-alt-pos="pos-4">ARCHIVE READY</div>
+                <div class="el pos-1" data-alt-pos="pos-4">Y2K SHADOWS</div>
+                <div class="el pos-1" data-alt-pos="pos-4">NO COMPROMISE</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-3" data-alt-pos="pos-2" data-scramble-duration="2.5">R</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-2" data-alt-pos="pos-4">SLOW MOTION</div>
+                <div class="el pos-2" data-alt-pos="pos-4">TEXTURE FIRST</div>
+                <div class="el pos-2" data-alt-pos="pos-4">ARCHIVE LAYER</div>
+            </div>
+
+            <div class="group">
+                <div class="el el--xl pos-1" data-alt-pos="pos-3" data-scramble-duration="2.5">C</div>
+            </div>
+
+            <div class="group">
+                <div class="el pos-3" data-alt-pos="pos-1">STATIC / KINETIC</div>
+                <div class="el pos-3" data-alt-pos="pos-1">NO NOISE</div>
+                <div class="el pos-3" data-alt-pos="pos-1">VOID</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- GSAP libs -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollSmoother.min.js"></script>
+    <script src="scroll-motion.js"></script>
+</body>
+</html>
