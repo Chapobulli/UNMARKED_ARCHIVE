@@ -589,6 +589,12 @@ a:hover {
     position: relative;
     overflow: auto;
     cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel-slide::-webkit-scrollbar {
+    display: none;
 }
 
 .carousel-slide:active {
