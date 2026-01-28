@@ -171,6 +171,57 @@ if (productCarousel) {
                 slide.scrollTop = scrollYPercent * (slide.scrollHeight - slide.clientHeight);
             }, 0);
         }, { passive: false });
+        
+        // Touch pinch zoom for mobile
+        let touchStartDistance = 0;
+        let touchZoomStart = zoomLevel;
+        
+        slide.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                touchStartDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                touchZoomStart = zoomLevel;
+            }
+        }, { passive: false });
+        
+        slide.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const touchDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                
+                const img = images[slideIndex];
+                if (!img) return;
+                
+                // Calculate zoom based on pinch distance
+                const scale = touchDistance / touchStartDistance;
+                zoomLevel = Math.max(1, Math.min(3, touchZoomStart * scale));
+                
+                // Apply zoom
+                img.style.width = `${zoomLevel * 100}%`;
+                img.style.height = `${zoomLevel * 100}%`;
+                img.style.minWidth = `${zoomLevel * 100}%`;
+                img.style.minHeight = `${zoomLevel * 100}%`;
+            }
+        }, { passive: false });
+        
+        slide.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) {
+                touchStartDistance = 0;
+            }
+        });
+                slide.scrollTop = scrollYPercent * (slide.scrollHeight - slide.clientHeight);
+            }, 0);
+        }, { passive: false });
     });
     
     // Prevent context menu on images
