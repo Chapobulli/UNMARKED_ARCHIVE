@@ -1161,28 +1161,38 @@ body {
     .menu-toggle {
         display: flex;
         order: 2;
+        background: transparent;
+        border: none;
+        z-index: 1001;
+    }
+
+    .header .container {
+        position: relative;
     }
 
     .nav {
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 80px;
         left: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.98);
+        width: 100vw;
+        background: rgba(0, 0, 0, 0.99);
         backdrop-filter: blur(10px);
         flex-direction: column;
         gap: 0;
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1.5rem;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+        transition: max-height 0.4s ease;
         border-bottom: 1px solid var(--color-border);
         visibility: hidden;
+        z-index: 1000;
     }
 
     .nav.active {
-        max-height: 500px;
+        max-height: calc(100vh - 80px);
         visibility: visible;
+        overflow-y: auto;
     }
 
     .nav-link {
