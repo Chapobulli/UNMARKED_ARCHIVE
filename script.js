@@ -56,10 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     
     let currentImageIndex = 0;
+    let currentZoom = 100;
+    const minZoom = 100;
+    const maxZoom = 300;
 
     masonryImgs.forEach(img => {
         img.addEventListener('click', function() {
             currentImageIndex = parseInt(this.getAttribute('data-index'));
+            currentZoom = 100;
             openImageModal();
         });
     });
@@ -67,13 +71,58 @@ document.addEventListener('DOMContentLoaded', function() {
     function openImageModal() {
         imageModal.classList.add('active');
         updateSliderImage();
+        resetZoom();
         document.body.style.overflow = 'hidden';
     }
 
     function updateSliderImage() {
         imageModalImg.src = productImages[currentImageIndex];
         sliderCounter.textContent = `${currentImageIndex + 1} / ${productImages.length}`;
+        currentZoom = 100;
+        updateZoomUI();
     }
+
+    function resetZoom() {
+        currentZoom = 100;
+        imageModalImg.style.transform = 'scale(1)';
+        updateZoomUI();
+    }
+
+    function updateZoomUI() {
+        document.getElementById('zoomLevel').textContent = `${currentZoom}%`;
+    }
+
+    function setZoom(level) {
+        currentZoom = Math.max(minZoom, Math.min(maxZoom, level));
+        const scale = currentZoom / 100;
+        imageModalImg.style.transform = `scale(${scale})`;
+        updateZoomUI();
+    }
+
+    // Zoom controls
+    document.getElementById('zoomIn').addEventListener('click', function() {
+        setZoom(currentZoom + 20);
+    });
+
+    document.getElementById('zoomOut').addEventListener('click', function() {
+        setZoom(currentZoom - 20);
+    });
+
+    // Scroll zoom
+    imageModalImg.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -10 : 10;
+        setZoom(currentZoom + delta);
+    }, { passive: false });
+
+    // Double click to zoom
+    imageModalImg.addEventListener('dblclick', function() {
+        if (currentZoom === 100) {
+            setZoom(200);
+        } else {
+            resetZoom();
+        }
+    });
 
     function closeImageModal() {
         imageModal.classList.remove('active');
