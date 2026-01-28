@@ -106,10 +106,11 @@ if (productCarousel) {
     });
     
     // Enable drag scrolling within each slide for zoomed images
-    slides.forEach(slide => {
+    slides.forEach((slide, slideIndex) => {
         let isDragging = false;
         let slideStartX, slideStartY;
         let slideScrollLeft, slideScrollTop;
+        let zoomLevel = 1.6; // Starting zoom level (160%)
         
         slide.addEventListener('mousedown', (e) => {
             if (e.target.classList.contains('carousel-arrow')) return;
@@ -142,6 +143,34 @@ if (productCarousel) {
             slide.scrollLeft = slideScrollLeft - walkX;
             slide.scrollTop = slideScrollTop - walkY;
         });
+        
+        // Mouse wheel zoom control
+        slide.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            
+            const img = images[slideIndex];
+            if (!img) return;
+            
+            // Get scroll position before zoom
+            const scrollXPercent = slide.scrollLeft / (slide.scrollWidth - slide.clientWidth) || 0;
+            const scrollYPercent = slide.scrollTop / (slide.scrollHeight - slide.clientHeight) || 0;
+            
+            // Adjust zoom level
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            zoomLevel = Math.max(1, Math.min(3, zoomLevel + delta)); // Min 100%, Max 300%
+            
+            // Apply zoom
+            img.style.width = `${zoomLevel * 100}%`;
+            img.style.height = `${zoomLevel * 100}%`;
+            img.style.minWidth = `${zoomLevel * 100}%`;
+            img.style.minHeight = `${zoomLevel * 100}%`;
+            
+            // Restore scroll position proportionally
+            setTimeout(() => {
+                slide.scrollLeft = scrollXPercent * (slide.scrollWidth - slide.clientWidth);
+                slide.scrollTop = scrollYPercent * (slide.scrollHeight - slide.clientHeight);
+            }, 0);
+        }, { passive: false });
     });
     
     // Prevent context menu on images
