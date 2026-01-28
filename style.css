@@ -1272,7 +1272,8 @@ body {
     }
 
     .logo-link {
-        flex: 1;
+        flex: 0 0 auto;
+        padding: 0.25rem 0.5rem;
     }
 
     .hero-title {
