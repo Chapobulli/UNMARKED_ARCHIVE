@@ -619,45 +619,46 @@ a:hover {
 }
 
 .carousel-arrow {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid var(--color-text);
+    background: transparent;
+    border: none;
     color: var(--color-text);
-    width: 50px;
-    height: 50px;
-    font-size: 2rem;
+    width: 80px;
+    height: 120px;
+    font-size: 4rem;
+    font-weight: 100;
     cursor: pointer;
-    z-index: 100;
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
-    opacity: 1;
-    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1;
     padding: 0;
     user-select: none;
     -webkit-user-select: none;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .carousel-arrow:hover {
-    background: rgba(0, 0, 0, 1);
-    border-color: var(--color-accent);
-    transform: translateY(-50%) scale(1.1);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.15);
 }
 
 .carousel-arrow:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(-50%) scale(0.9);
 }
 
 .carousel-arrow-prev {
-    left: 1.5rem;
+    left: 1rem;
 }
 
 .carousel-arrow-next {
-    right: 1.5rem;
+    right: 1rem;
 }
 
 .carousel-indicator {
