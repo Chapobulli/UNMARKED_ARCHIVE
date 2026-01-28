@@ -2,22 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <title>FAQ – UNMARKED ARCHIVE</title>
-    
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.2">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     
     <style>
         .faq-hero {
             padding: 6rem 0 3rem;
+            margin-top: 80px;
             text-align: center;
             border-bottom: 1px solid var(--color-border);
         }
 
         .faq-hero h1 {
+            font-family: var(--font-accent);
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             letter-spacing: 0.2rem;
@@ -39,6 +41,7 @@
         }
 
         .faq-category h2 {
+            font-family: var(--font-accent);
             font-size: 1.8rem;
             letter-spacing: 0.16rem;
             text-transform: uppercase;
@@ -55,6 +58,7 @@
 
         .faq-question {
             font-size: 1.1rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08rem;
             margin-bottom: 0.75rem;
@@ -95,14 +99,19 @@
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo-link">
-                <img src="assets/images/logo.png" alt="UNMARKED ARCHIVE" class="header-logo-img" />
-                <h1 class="logo">UNMARKED ARCHIVE</h1>
+                <img src="assets/images/unmarked archive banner.png?v=3" alt="UNMARKED ARCHIVE" class="header-banner" />
             </a>
-            <nav class="nav">
-                <a href="index.html#product" class="nav-link">SAMPLE</a>
-                <a href="index.html#contact" class="nav-link">PREORDER</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="navMenu">
+                <a href="index.html#story" class="nav-link">STORY</a>
+                <a href="index.html#product" class="nav-link">THE PIECE</a>
                 <a href="lookbook.html" class="nav-link">LOOKBOOK</a>
                 <a href="privacy.html" class="nav-link">PRIVACY</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
             </nav>
         </div>
     </header>
@@ -292,11 +301,15 @@
                 <div class="footer-col">
                     <a href="https://www.instagram.com/unmarked_archive.brand" class="footer-link" target="_blank" rel="noopener">INSTAGRAM</a>
                     <a href="https://www.tiktok.com/@unmarked_archive" class="footer-link" target="_blank" rel="noopener">TIKTOK</a>
+                    <a href="index.html#product" class="footer-link">THE PIECE</a>
+                    <a href="lookbook.html" class="footer-link">LOOKBOOK</a>
+                    <a href="privacy.html" class="footer-link">PRIVACY</a>
                     <a href="faq.html" class="footer-link">FAQ</a>
-                    <a href="#terms" class="footer-link">TERMS</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
