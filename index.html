@@ -109,16 +109,21 @@
             <p class="section-intro">The T-Shirt that started everything</p>
 
             <div class="product-showcase">
-                <div class="product-gallery">
-                    <div class="product-image-main">
-                        <img src="assets/product/embroidery detail first photo.jpeg" alt="Archive Piece 001" id="mainProductImage">
+                <div class="product-gallery-masonry">
+                    <div class="masonry-item masonry-item-1">
+                        <img src="assets/product/embroidery detail first photo.jpeg" alt="Detail 1" class="masonry-img" data-index="0">
                     </div>
-                    <div class="product-thumbnails">
-                        <img src="assets/product/embroidery detail first photo.jpeg" alt="Detail 1" class="thumbnail active" data-image="assets/product/embroidery detail first photo.jpeg">
-                        <img src="assets/product/consume & comply detail second photo.png" alt="Detail 2" class="thumbnail" data-image="assets/product/consume & comply detail second photo.png">
-                        <img src="assets/product/product inside patch third photo.jpeg" alt="Detail 3" class="thumbnail" data-image="assets/product/product inside patch third photo.jpeg">
-                        <img src="assets/product/back label detail 4th photo.jpeg" alt="Detail 4" class="thumbnail" data-image="assets/product/back label detail 4th photo.jpeg">
-                        <img src="assets/product/foto grafica 5th photo.png" alt="Detail 5" class="thumbnail" data-image="assets/product/foto grafica 5th photo.png">
+                    <div class="masonry-item masonry-item-2">
+                        <img src="assets/product/consume & comply detail second photo.png" alt="Detail 2" class="masonry-img" data-index="1">
+                    </div>
+                    <div class="masonry-item masonry-item-3">
+                        <img src="assets/product/product inside patch third photo.jpeg" alt="Detail 3" class="masonry-img" data-index="2">
+                    </div>
+                    <div class="masonry-item masonry-item-4">
+                        <img src="assets/product/back label detail 4th photo.jpeg" alt="Detail 4" class="masonry-img" data-index="3">
+                    </div>
+                    <div class="masonry-item masonry-item-5">
+                        <img src="assets/product/foto grafica 5th photo.png" alt="Detail 5" class="masonry-img" data-index="4">
                     </div>
                 </div>
 
@@ -264,6 +269,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content image-modal-content">
+            <button class="modal-close" id="imageModalClose">&times;</button>
+            <div class="slider-container">
+                <button class="slider-nav slider-prev" id="sliderPrev">‹</button>
+                <img class="image-modal-img" id="imageModalImg" src="assets/product/embroidery detail first photo.jpeg" alt="Product zoom">
+                <button class="slider-nav slider-next" id="sliderNext">›</button>
+            </div>
+            <div class="slider-counter" id="sliderCounter">1 / 5</div>
+        </div>
+    </div>
 
     <!-- Size Guide Modal -->
     <div class="modal" id="sizeModal">

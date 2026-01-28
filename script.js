@@ -29,20 +29,72 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Product Image Gallery
-    const mainImage = document.getElementById('mainProductImage');
-    const thumbnails = document.querySelectorAll('.thumbnail');
+    // Product Image Gallery - Masonry with Slider
+    const masonryImgs = document.querySelectorAll('.masonry-img');
+    const imageModal = document.getElementById('imageModal');
+    const imageModalImg = document.getElementById('imageModalImg');
+    const imageModalClose = document.getElementById('imageModalClose');
+    const sliderPrev = document.getElementById('sliderPrev');
+    const sliderNext = document.getElementById('sliderNext');
+    const sliderCounter = document.getElementById('sliderCounter');
+    
+    const productImages = [
+        'assets/product/embroidery detail first photo.jpeg',
+        'assets/product/consume & comply detail second photo.png',
+        'assets/product/product inside patch third photo.jpeg',
+        'assets/product/back label detail 4th photo.jpeg',
+        'assets/product/foto grafica 5th photo.png'
+    ];
+    
+    let currentImageIndex = 0;
 
-    thumbnails.forEach(thumb => {
-        thumb.addEventListener('click', function() {
-            // Update main image
-            const newImage = this.getAttribute('data-image');
-            mainImage.src = newImage;
-
-            // Update active state
-            thumbnails.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
+    masonryImgs.forEach(img => {
+        img.addEventListener('click', function() {
+            currentImageIndex = parseInt(this.getAttribute('data-index'));
+            openImageModal();
         });
+    });
+
+    function openImageModal() {
+        imageModal.classList.add('active');
+        updateSliderImage();
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateSliderImage() {
+        imageModalImg.src = productImages[currentImageIndex];
+        sliderCounter.textContent = `${currentImageIndex + 1} / ${productImages.length}`;
+    }
+
+    function closeImageModal() {
+        imageModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    sliderNext.addEventListener('click', function() {
+        currentImageIndex = (currentImageIndex + 1) % productImages.length;
+        updateSliderImage();
+    });
+
+    sliderPrev.addEventListener('click', function() {
+        currentImageIndex = (currentImageIndex - 1 + productImages.length) % productImages.length;
+        updateSliderImage();
+    });
+
+    imageModalClose.addEventListener('click', closeImageModal);
+
+    imageModal.addEventListener('click', function(e) {
+        if (e.target === imageModal) {
+            closeImageModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (imageModal.classList.contains('active')) {
+            if (e.key === 'ArrowRight') sliderNext.click();
+            if (e.key === 'ArrowLeft') sliderPrev.click();
+            if (e.key === 'Escape') closeImageModal();
+        }
     });
 
     // Smooth Scroll for Navigation
