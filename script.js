@@ -68,27 +68,18 @@ if (productCarousel) {
                 currentSlide = index;
             }
         });
-        
-        // Parallax effect
-        slides.forEach((slide, index) => {
-            const slideLeft = slide.offsetLeft;
-            const slideOffset = scrollLeft - slideLeft + containerWidth / 2;
-            const parallaxAmount = slideOffset * 0.15;
-            
-            const img = images[index];
-            if (img) {
-                img.style.transform = `translateX(${parallaxAmount}px) scale(1.1)`;
-            }
-        });
     });
     
-    // Smooth drag scrolling
+    // Smooth drag scrolling - only for carousel horizontal scroll
     let isDown = false;
     let startX;
     let scrollLeftStart;
     
     productCarousel.addEventListener('mousedown', (e) => {
-        if (e.target.classList.contains('carousel-arrow')) return;
+        // Only drag on carousel container, not on individual slides
+        if (e.target.classList.contains('carousel-arrow') || 
+            e.target.classList.contains('carousel-slide') ||
+            e.target.classList.contains('carousel-image')) return;
         isDown = true;
         productCarousel.style.cursor = 'grabbing';
         startX = e.pageX - productCarousel.offsetLeft;
@@ -112,6 +103,45 @@ if (productCarousel) {
         const x = e.pageX - productCarousel.offsetLeft;
         const walk = (x - startX) * 2;
         productCarousel.scrollLeft = scrollLeftStart - walk;
+    });
+    
+    // Enable drag scrolling within each slide for zoomed images
+    slides.forEach(slide => {
+        let isDragging = false;
+        let slideStartX, slideStartY;
+        let slideScrollLeft, slideScrollTop;
+        
+        slide.addEventListener('mousedown', (e) => {
+            if (e.target.classList.contains('carousel-arrow')) return;
+            isDragging = true;
+            slide.style.cursor = 'grabbing';
+            slideStartX = e.pageX - slide.offsetLeft;
+            slideStartY = e.pageY - slide.offsetTop;
+            slideScrollLeft = slide.scrollLeft;
+            slideScrollTop = slide.scrollTop;
+            e.preventDefault();
+        });
+        
+        slide.addEventListener('mouseleave', () => {
+            isDragging = false;
+            slide.style.cursor = 'grab';
+        });
+        
+        slide.addEventListener('mouseup', () => {
+            isDragging = false;
+            slide.style.cursor = 'grab';
+        });
+        
+        slide.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - slide.offsetLeft;
+            const y = e.pageY - slide.offsetTop;
+            const walkX = (x - slideStartX) * 1.5;
+            const walkY = (y - slideStartY) * 1.5;
+            slide.scrollLeft = slideScrollLeft - walkX;
+            slide.scrollTop = slideScrollTop - walkY;
+        });
     });
     
     // Prevent context menu on images
