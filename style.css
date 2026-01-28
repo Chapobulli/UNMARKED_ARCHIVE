@@ -131,6 +131,9 @@ body {
     display: block;
     opacity: 1;
     transition: opacity 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
 }
 
 .logo-link:hover {
