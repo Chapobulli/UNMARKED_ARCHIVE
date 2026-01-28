@@ -124,6 +124,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo-link {
@@ -1105,10 +1106,12 @@ body {
         overflow: hidden;
         transition: max-height 0.3s ease;
         border-bottom: 1px solid var(--color-border);
+        visibility: hidden;
     }
 
     .nav.active {
         max-height: 500px;
+        visibility: visible;
     }
 
     .nav-link {
