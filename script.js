@@ -219,9 +219,6 @@ if (productCarousel) {
                 touchStartDistance = 0;
             }
         });
-                slide.scrollTop = scrollYPercent * (slide.scrollHeight - slide.clientHeight);
-            }, 0);
-        }, { passive: false });
     });
     
     // Prevent context menu on images
