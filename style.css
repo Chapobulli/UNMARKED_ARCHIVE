@@ -241,7 +241,7 @@ body {
 
 .hero-content {
     text-align: center;
-    padding-top: 6rem;
+    padding-top: 10rem;
 }
 
 .hero-title {
@@ -259,6 +259,14 @@ body {
     letter-spacing: 0.3em;
     text-transform: uppercase;
     opacity: 0.8;
+}
+
+.hero-tagline {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    margin-top: 1rem;
+    opacity: 0.9;
 }
 
 .scroll-indicator {
@@ -314,6 +322,14 @@ body {
 .story-text strong {
     font-weight: 600;
     letter-spacing: 0.05em;
+}
+
+.highlight-text {
+    background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    padding: 1.5rem;
+    border-left: 3px solid var(--color-accent);
+    margin: 2rem 0;
+    font-weight: 400;
 }
 
 .story-divider {
