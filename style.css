@@ -994,6 +994,10 @@ body {
     background: var(--color-bg);
 }
 
+.flow-text-compact {
+    padding: 1.5rem 2rem;
+}
+
 .flow-line {
     font-size: 1.1rem;
     letter-spacing: 0.15em;
