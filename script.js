@@ -59,11 +59,16 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentZoom = 100;
     const minZoom = 100;
     const maxZoom = 300;
+    let isDragging = false;
+    let startX, startY;
+    let translateX = 0, translateY = 0;
 
     masonryImgs.forEach(img => {
         img.addEventListener('click', function() {
             currentImageIndex = parseInt(this.getAttribute('data-index'));
             currentZoom = 100;
+            translateX = 0;
+            translateY = 0;
             openImageModal();
         });
     });
@@ -79,12 +84,17 @@ document.addEventListener('DOMContentLoaded', function() {
         imageModalImg.src = productImages[currentImageIndex];
         sliderCounter.textContent = `${currentImageIndex + 1} / ${productImages.length}`;
         currentZoom = 100;
+        translateX = 0;
+        translateY = 0;
         updateZoomUI();
+        updateImageTransform();
     }
 
     function resetZoom() {
         currentZoom = 100;
-        imageModalImg.style.transform = 'scale(1)';
+        translateX = 0;
+        translateY = 0;
+        updateImageTransform();
         updateZoomUI();
     }
 
@@ -92,10 +102,31 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('zoomLevel').textContent = `${currentZoom}%`;
     }
 
-    function setZoom(level) {
-        currentZoom = Math.max(minZoom, Math.min(maxZoom, level));
+    function updateImageTransform() {
         const scale = currentZoom / 100;
-        imageModalImg.style.transform = `scale(${scale})`;
+        imageModalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        
+        // Update cursor
+        if (currentZoom > 100) {
+            imageModalImg.style.cursor = isDragging ? 'grabbing' : 'grab';
+            imageModalImg.classList.add('zoomed');
+        } else {
+            imageModalImg.style.cursor = 'zoom-in';
+            imageModalImg.classList.remove('zoomed');
+        }
+    }
+
+    function setZoom(level) {
+        const oldZoom = currentZoom;
+        currentZoom = Math.max(minZoom, Math.min(maxZoom, level));
+        
+        // Reset pan when zooming out to 100%
+        if (currentZoom === 100) {
+            translateX = 0;
+            translateY = 0;
+        }
+        
+        updateImageTransform();
         updateZoomUI();
     }
 
@@ -108,21 +139,94 @@ document.addEventListener('DOMContentLoaded', function() {
         setZoom(currentZoom - 20);
     });
 
-    // Scroll zoom
+    // Mouse wheel zoom
     imageModalImg.addEventListener('wheel', function(e) {
         e.preventDefault();
         const delta = e.deltaY > 0 ? -10 : 10;
         setZoom(currentZoom + delta);
     }, { passive: false });
 
-    // Double click to zoom
-    imageModalImg.addEventListener('dblclick', function() {
+    // Double click to zoom in/out
+    imageModalImg.addEventListener('dblclick', function(e) {
         if (currentZoom === 100) {
             setZoom(200);
         } else {
             resetZoom();
         }
     });
+
+    // Pan (drag) functionality - Desktop
+    imageModalImg.addEventListener('mousedown', function(e) {
+        if (currentZoom <= 100) return;
+        
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        imageModalImg.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateImageTransform();
+    });
+
+    document.addEventListener('mouseup', function() {
+        if (isDragging) {
+            isDragging = false;
+            imageModalImg.style.cursor = currentZoom > 100 ? 'grab' : 'zoom-in';
+        }
+    });
+
+    // Touch pan functionality - Mobile
+    let touchStartX, touchStartY;
+
+    imageModalImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+            // Pinch zoom setup
+            const touch1 = e.touches[0];
+            const touch2 = e.touches[1];
+            initialDistance = Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+            );
+            initialZoom = currentZoom;
+        } else if (e.touches.length === 1 && currentZoom > 100) {
+            // Pan setup
+            touchStartX = e.touches[0].clientX - translateX;
+            touchStartY = e.touches[0].clientY - translateY;
+        }
+    }, { passive: true });
+
+    imageModalImg.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+            // Pinch zoom
+            const touch1 = e.touches[0];
+            const touch2 = e.touches[1];
+            const distance = Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+            );
+            
+            const scale = distance / initialDistance;
+            const newZoom = initialZoom * scale;
+            setZoom(newZoom);
+            e.preventDefault();
+        } else if (e.touches.length === 1 && currentZoom > 100) {
+            // Pan
+            translateX = e.touches[0].clientX - touchStartX;
+            translateY = e.touches[0].clientY - touchStartY;
+            updateImageTransform();
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    // Pinch to zoom variables
+    let initialDistance = 0;
+    let initialZoom = 100;
 
     function closeImageModal() {
         imageModal.classList.remove('active');
