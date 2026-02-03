@@ -273,45 +273,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Email Notification Form
+    // Email Notification Form (Mailchimp)
     const notifyForm = document.getElementById('notifyForm');
     const formMessage = document.getElementById('formMessage');
 
     if (notifyForm) {
-        notifyForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const submitBtn = notifyForm.querySelector('.btn-submit');
-
-            // Disable button during submission
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'SENDING...';
-
-            try {
-                // Netlify Forms submission
-                const formData = new FormData(notifyForm);
-
-                const response = await fetch('/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
-                });
-
-                if (response.ok) {
-                    formMessage.textContent = '✓ You\'re on the list! We\'ll notify you at launch.';
-                    formMessage.style.color = '#47f2d0';
-                    notifyForm.reset();
-                } else {
-                    throw new Error('Submission failed');
-                }
-            } catch (error) {
-                formMessage.textContent = '✗ Something went wrong. Please try again.';
-                formMessage.style.color = '#ff4444';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'NOTIFY ME';
-            }
+        notifyForm.addEventListener('submit', function(e) {
+            // Let the form submit naturally to Mailchimp
+            formMessage.textContent = '✓ Redirecting to subscription...';
+            formMessage.style.color = '#47f2d0';
         });
     }
 
