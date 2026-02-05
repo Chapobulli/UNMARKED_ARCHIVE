@@ -989,34 +989,32 @@ body {
 
 .lookbook-flow {
     background: var(--color-bg);
-    perspective: 1200px;
 }
 
 .flow-block {
     width: 100%;
     position: relative;
-    --flow-rotate-in: 18deg;
-    --flow-rotate-out: -18deg;
+    --flow-in-x: 14vw;
+    --flow-out-x: -14vw;
     opacity: 0;
-    transform: rotateY(var(--flow-rotate-in)) translateY(40px);
-    transform-origin: center center;
+    transform: translateX(var(--flow-in-x));
     transition: transform 0.9s ease, opacity 0.9s ease;
     will-change: transform, opacity;
 }
 
 .flow-block:nth-of-type(even) {
-    --flow-rotate-in: -18deg;
-    --flow-rotate-out: 18deg;
+    --flow-in-x: -14vw;
+    --flow-out-x: 14vw;
 }
 
 .flow-block.is-active {
     opacity: 1;
-    transform: rotateY(0deg) translateY(0);
+    transform: translateX(0);
 }
 
 .flow-block.is-exit {
     opacity: 0;
-    transform: rotateY(var(--flow-rotate-out)) translateY(-40px);
+    transform: translateX(var(--flow-out-x));
 }
 
 .flow-block.image {
