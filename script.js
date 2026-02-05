@@ -346,8 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Lookbook slide reveal on scroll
-    const lookbookBlocks = document.querySelectorAll('.flow-block');
-    const lookbookText = document.querySelectorAll('.flow-text');
+    const lookbookBlocks = document.querySelectorAll('.flow-item');
 
     if (lookbookBlocks.length > 0) {
         let activeBlock = null;
@@ -364,16 +363,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, {
-            threshold: 0.6,
-            rootMargin: '0px 0px -20% 0px'
+            threshold: 0.55,
+            rootMargin: '0px 0px -10% 0px'
         });
 
         lookbookBlocks.forEach(block => {
             lookbookObserver.observe(block);
-        });
-
-        lookbookText.forEach(text => {
-            lookbookObserver.observe(text);
         });
     }
 

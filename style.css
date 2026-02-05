@@ -989,47 +989,58 @@ body {
 
 .lookbook-flow {
     background: var(--color-bg);
+    scroll-snap-type: y mandatory;
 }
 
-.flow-block {
+.flow-item {
     width: 100%;
     position: relative;
+    height: 100vh;
+    overflow: hidden;
+    scroll-snap-align: start;
     opacity: 0;
     transform: translateX(18vw);
     transition: transform 0.8s ease, opacity 0.8s ease;
     will-change: transform, opacity;
 }
 
-.flow-block.is-active {
+.flow-item.is-active {
     opacity: 1;
     transform: translateX(0);
 }
 
-.flow-block.is-exit {
+.flow-item.is-exit {
     opacity: 0;
     transform: translateX(-18vw);
 }
 
-.flow-block.image {
-    margin: 0;
+.flow-media {
+    position: absolute;
+    inset: 0;
 }
 
-.flow-block.image img {
+.flow-media img,
+.flow-media video {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
     object-fit: cover;
-}
-
-.flow-block.video {
-    position: relative;
-    margin: 0;
-}
-
-.lookbook-video {
-    width: 100%;
-    height: auto;
     display: block;
+}
+
+.flow-caption {
+    position: absolute;
+    left: 50%;
+    bottom: 6vh;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
 }
 
 .media-badge {
@@ -1045,22 +1056,16 @@ body {
     z-index: 10;
 }
 
-.flow-text {
-    padding: 4rem 2rem;
-    text-align: center;
-    background: var(--color-bg);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.flow-text-compact {
-    padding: 1.5rem 2rem;
-}
-
-.flow-text.is-active {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 768px) {
+    .flow-caption {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        bottom: 5vh;
+        padding: 0.5rem 1rem;
+        max-width: 90vw;
+        text-align: center;
+        white-space: normal;
+    }
 }
 
 .flow-line {
@@ -1072,8 +1077,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .flow-block,
-    .flow-text {
+    .flow-item {
         transition: none;
         transform: none;
         opacity: 1;
