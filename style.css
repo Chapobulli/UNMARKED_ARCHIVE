@@ -942,6 +942,11 @@ body {
 }
 
 /* Lookbook Styles */
+.lookbook-page {
+    --font-main: 'Space Grotesk', sans-serif;
+    --font-accent: 'Space Grotesk', sans-serif;
+}
+
 .lookbook-hero {
     position: relative;
     min-height: 70vh;
@@ -984,11 +989,34 @@ body {
 
 .lookbook-flow {
     background: var(--color-bg);
+    perspective: 1200px;
 }
 
 .flow-block {
     width: 100%;
     position: relative;
+    --flow-rotate-in: 18deg;
+    --flow-rotate-out: -18deg;
+    opacity: 0;
+    transform: rotateY(var(--flow-rotate-in)) translateY(40px);
+    transform-origin: center center;
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    will-change: transform, opacity;
+}
+
+.flow-block:nth-of-type(even) {
+    --flow-rotate-in: -18deg;
+    --flow-rotate-out: 18deg;
+}
+
+.flow-block.is-active {
+    opacity: 1;
+    transform: rotateY(0deg) translateY(0);
+}
+
+.flow-block.is-exit {
+    opacity: 0;
+    transform: rotateY(var(--flow-rotate-out)) translateY(-40px);
 }
 
 .flow-block.image {
@@ -1030,10 +1058,18 @@ body {
     padding: 4rem 2rem;
     text-align: center;
     background: var(--color-bg);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .flow-text-compact {
     padding: 1.5rem 2rem;
+}
+
+.flow-text.is-active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .flow-line {
@@ -1042,6 +1078,15 @@ body {
     text-transform: uppercase;
     margin: 1rem 0;
     opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flow-block,
+    .flow-text {
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
 }
 
 .image-modal-content {

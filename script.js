@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const sliderPrev = document.getElementById('sliderPrev');
     const sliderNext = document.getElementById('sliderNext');
     const sliderCounter = document.getElementById('sliderCounter');
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+    const isProductGalleryReady = imageModal && imageModalImg && sliderPrev && sliderNext && sliderCounter;
     
     const productImages = [
         'assets/product/embroidery detail first photo.jpeg',
@@ -63,22 +66,23 @@ document.addEventListener('DOMContentLoaded', function() {
     let startX, startY;
     let translateX = 0, translateY = 0;
 
-    masonryImgs.forEach(img => {
-        img.addEventListener('click', function() {
-            currentImageIndex = parseInt(this.getAttribute('data-index'));
-            currentZoom = 100;
-            translateX = 0;
-            translateY = 0;
-            openImageModal();
+    if (isProductGalleryReady) {
+        masonryImgs.forEach(img => {
+            img.addEventListener('click', function() {
+                currentImageIndex = parseInt(this.getAttribute('data-index'));
+                currentZoom = 100;
+                translateX = 0;
+                translateY = 0;
+                openImageModal();
+            });
         });
-    });
 
-    function openImageModal() {
-        imageModal.classList.add('active');
-        updateSliderImage();
-        resetZoom();
-        document.body.style.overflow = 'hidden';
-    }
+        function openImageModal() {
+            imageModal.classList.add('active');
+            updateSliderImage();
+            resetZoom();
+            document.body.style.overflow = 'hidden';
+        }
 
     function updateSliderImage() {
         imageModalImg.src = productImages[currentImageIndex];
@@ -131,13 +135,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Zoom controls
-    document.getElementById('zoomIn').addEventListener('click', function() {
-        setZoom(currentZoom + 20);
-    });
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', function() {
+            setZoom(currentZoom + 20);
+        });
+    }
 
-    document.getElementById('zoomOut').addEventListener('click', function() {
-        setZoom(currentZoom - 20);
-    });
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', function() {
+            setZoom(currentZoom - 20);
+        });
+    }
 
     // Mouse wheel zoom
     imageModalImg.addEventListener('wheel', function(e) {
@@ -258,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.key === 'Escape') closeImageModal();
         }
     });
+    }
 
     // Smooth Scroll for Navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -333,6 +342,35 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         observer.observe(el);
     });
+
+    // Lookbook 3D reveal on scroll
+    const lookbookBlocks = document.querySelectorAll('.flow-block');
+    const lookbookText = document.querySelectorAll('.flow-text');
+
+    if (lookbookBlocks.length > 0) {
+        const lookbookObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-active');
+                    entry.target.classList.remove('is-exit');
+                } else {
+                    entry.target.classList.remove('is-active');
+                    entry.target.classList.add('is-exit');
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -10% 0px'
+        });
+
+        lookbookBlocks.forEach(block => {
+            lookbookObserver.observe(block);
+        });
+
+        lookbookText.forEach(text => {
+            lookbookObserver.observe(text);
+        });
+    }
 
     // Size Guide Modal
     const sizeGuideBtn = document.getElementById('sizeGuideBtn');
