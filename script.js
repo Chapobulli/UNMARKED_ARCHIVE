@@ -5,9 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Loading Screen
     const loadingScreen = document.getElementById('loadingScreen');
     
-    setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-    }, 1500);
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 1500);
+    }
 
     // Mobile Menu Toggle
     const menuToggle = document.getElementById('menuToggle');
