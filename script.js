@@ -345,24 +345,27 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-    // Lookbook 3D reveal on scroll
+    // Lookbook slide reveal on scroll
     const lookbookBlocks = document.querySelectorAll('.flow-block');
     const lookbookText = document.querySelectorAll('.flow-text');
 
     if (lookbookBlocks.length > 0) {
+        let activeBlock = null;
         const lookbookObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    if (activeBlock && activeBlock !== entry.target) {
+                        activeBlock.classList.remove('is-active');
+                        activeBlock.classList.add('is-exit');
+                    }
                     entry.target.classList.add('is-active');
                     entry.target.classList.remove('is-exit');
-                } else {
-                    entry.target.classList.remove('is-active');
-                    entry.target.classList.add('is-exit');
+                    activeBlock = entry.target;
                 }
             });
         }, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -10% 0px'
+            threshold: 0.6,
+            rootMargin: '0px 0px -20% 0px'
         });
 
         lookbookBlocks.forEach(block => {

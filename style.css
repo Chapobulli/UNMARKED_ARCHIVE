@@ -994,17 +994,10 @@ body {
 .flow-block {
     width: 100%;
     position: relative;
-    --flow-in-x: 14vw;
-    --flow-out-x: -14vw;
     opacity: 0;
-    transform: translateX(var(--flow-in-x));
-    transition: transform 0.9s ease, opacity 0.9s ease;
+    transform: translateX(18vw);
+    transition: transform 0.8s ease, opacity 0.8s ease;
     will-change: transform, opacity;
-}
-
-.flow-block:nth-of-type(even) {
-    --flow-in-x: -14vw;
-    --flow-out-x: 14vw;
 }
 
 .flow-block.is-active {
@@ -1014,7 +1007,7 @@ body {
 
 .flow-block.is-exit {
     opacity: 0;
-    transform: translateX(var(--flow-out-x));
+    transform: translateX(-18vw);
 }
 
 .flow-block.image {
